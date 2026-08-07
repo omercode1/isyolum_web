@@ -1,0 +1,241 @@
+---
+description: İşYolum web sitesi için proje mimarisi, tasarım, gizlilik, doğruluk ve geliştirme kuralları
+alwaysApply: true
+---
+
+# İşYolum Web Project Rules
+
+Bu repository yalnızca İşYolum mobil uygulamasının tanıtım web sitesidir.
+
+Mobil uygulama kodu bu repository kapsamında değildir. ASLA mobil uygulamaya ait kod oluşturma veya değiştirme.
+
+## Proje amacı
+
+İşYolum bir iş ilanı veya iş bulma uygulaması değildir.
+
+İşYolum; öğrencilerin, stajyerlerin, çalışanların, iş arayanların ve freelancerların çalışma dönemlerini, stajlarını, günlüklerini, belgelerini, hatırlatıcılarını ve ilerlemelerini düzenlemesine yardımcı olan gizlilik odaklı bir mobil uygulamadır.
+
+Web sitesinin amaçları:
+
+* İşYolum mobil uygulamasını tanıtmak
+* Erken erişim başvuruları toplamak
+* Üniversite ve şirketlere projeyi anlatmak
+* Teknoloji sağlayıcıları ve destek programlarına projeyi profesyonel şekilde sunmak
+* Kuluçka ve girişim programları için güçlü bir proje vitrini oluşturmak
+* Teknik mimariyi ve sosyal faydayı açık şekilde göstermek
+
+## Teknoloji
+
+Mevcut mimariyi koru:
+
+* Next.js
+* TypeScript
+* Tailwind CSS
+* Motion / mevcut animation altyapısı
+* Lucide React
+* Türkçe / İngilizce içerik sistemi
+
+Gereksiz dependency ekleme.
+
+Bir paket eklemek gerekiyorsa önce mevcut bağımlılıklarla çözülüp çözülemeyeceğini kontrol et.
+
+## Tasarım
+
+Mevcut tasarım dili:
+
+High Density / Quantum Lead OS.
+
+Korunması gereken özellikler:
+
+* slate-950 tabanlı koyu arka plan
+* slate-800 ince border
+* teknik mono typography
+* hafif grid overlay
+* SYS_ONLINE, SYNC, SYS_MOD_01, ISSUE_01 gibi teknik sistem etiketleri
+* yoğun fakat okunabilir layout
+* profesyonel terminal / operasyon sistemi hissi
+* modern ve kurumsal görünüm
+
+Kaçınılacak tasarımlar:
+
+* aşırı neon
+* gaming website görünümü
+* anlamsız glow efektleri
+* aşırı gradient
+* gereksiz animasyon
+* cyberpunk görünümü
+* okunabilirliği azaltan görsel efektler
+
+Responsive tasarım mutlaka korunmalıdır.
+
+Özellikle:
+
+360px
+390px
+430px
+768px
+1024px
+1280px
+1440px+
+
+ekran genişliklerini göz önünde bulundur.
+
+## Gizlilik
+
+İşYolum'un temel gizlilik yaklaşımı:
+
+* Kullanıcı verileri temel olarak cihaz üzerinde tutulur
+* SQLite ve SQLCipher kullanılır
+* Belgeler uygulamaya özel alanda saklanır
+* OCR cihaz içinde çalışır
+* Genel Arama cihaz içinde çalışır
+* Biyometrik veri İşYolum tarafından okunmaz veya saklanmaz
+* Kullanıcı belgeleri harici OCR servisine gönderilmez
+
+Şu ifadeleri ASLA kullanma:
+
+* %100 güvenli
+* kırılamaz
+* askerî düzeyde
+* bankacılık seviyesinde
+* veri kaybı yaşanmaz
+
+## Ürün durumu
+
+Her zaman doğru şekilde temsil et:
+
+* Uygulama henüz Google Play Store'da yayınlanmadı
+* Yayın öncesi beta ve gerçek cihaz testi aşamasında
+* Şifreli yedekleme henüz mevcut değil
+* Uygulama silinirse yerel veriler de silinebilir
+* Mevcut tek dosya sınırı 20 MB
+* Akıllı dosya sıkıştırma planlanıyor ancak tamamlanmadı
+* iOS sürümü henüz hazır değil
+
+Sahte:
+
+* kullanıcı sayısı
+* indirme sayısı
+* testimonial
+* kullanıcı yorumu
+* şirket logosu
+* partner logosu
+* başarı istatistiği
+
+oluşturma.
+
+## İş birlikleri
+
+İşYolum'un şu anda AWS, Google veya başka büyük teknoloji şirketiyle resmi ortaklığı yoktur.
+
+Şunları ASLA yazma:
+
+* AWS destekli
+* Google tarafından destekleniyor
+* Resmî partner
+
+Doğru ifade:
+
+"Teknik destek ve stratejik iş birliklerine açığız."
+
+## Erken erişim formu
+
+Environment variable:
+
+NEXT_PUBLIC_CONTACT_ENDPOINT
+
+Endpoint mevcut değilse:
+
+* sahte başarı mesajı gösterme
+* gerçek gönderim yapılmış gibi davranma
+
+Endpoint mevcutsa:
+
+* loading durumu
+* disabled state
+* response.ok kontrolü
+* HTTP error handling
+* network error handling
+* başarılı cevap sonrasında reset
+
+korunmalıdır.
+
+Accessibility ilişkilerini bozma.
+
+## Dil sistemi
+
+Türkçe ve İngilizce desteklenmektedir.
+
+Metinleri doğrudan component içine hardcode etmek yerine mümkün olduğunca:
+
+content/tr.ts
+content/en.ts
+
+üzerinden yönet.
+
+Yeni kullanıcıya görünen metin eklendiğinde mümkünse iki dilde de karşılığını ekle.
+
+## Kod değiştirme kuralları
+
+Her görevde:
+
+1. Önce ilgili dosyaları incele.
+2. Sorunun gerçek kaynağını belirle.
+3. Minimum gerekli değişikliği yap.
+4. Gereksiz refactor yapma.
+5. Çalışan özellikleri bozma.
+6. Kullanılmayan import bırakma.
+7. TypeScript hatası bırakma.
+8. Console.log bırakma.
+9. Gereksiz `any` kullanma.
+
+## Tehlikeli işlemler
+
+Aşağıdaki işlemleri kullanıcı açıkça istemediği sürece yapma:
+
+* rm -rf ile proje klasörü silmek
+* app klasörünü silmek
+* components klasörünü silmek
+* Git geçmişini resetlemek
+* git push --force
+* dependency major version değiştirmek
+* React veya Next.js downgrade / upgrade yapmak
+* lock file'ı yeniden üretmek
+* working tree'yi toplu şekilde geri almak
+
+Build hatasını çözmek için rastgele paket sürümü değiştirme.
+
+Önce hatanın gerçek sebebini araştır.
+
+## Next.js build
+
+Bu geliştirme ortamında NODE_ENV bazen development olarak tanımlanabilir.
+
+Production build gerektiğinde:
+
+NODE_ENV=production npm run build
+
+kullanılması gerekebilir.
+
+Build başarılı sayılabilmesi için gerçek exit code 0 olmalıdır.
+
+Build'i paralel olarak birden fazla kez başlatma.
+
+## Git
+
+Git permanent source of truth olarak kullanılmalıdır.
+
+Önemli değişikliklerden önce working tree durumunu kontrol et.
+
+Cursor checkpoint'leri Git yerine geçmez.
+
+Bir görevin sonunda mümkün olduğunda:
+
+* değiştirilen dosyaları
+* test sonuçlarını
+* lint sonucunu
+* build sonucunu
+
+raporla.
+
+Kullanıcı açıkça istemediği sürece otomatik olarak production'a deploy etme.
