@@ -3,12 +3,13 @@ import { Plus_Jakarta_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { LanguageProvider } from "@/lib/i18n";
+import { getMetadataBase } from "@/lib/site-url";
 
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", style: ["normal", "italic"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.APP_URL || "https://isyolum.com"),
+  metadataBase: getMetadataBase(),
   title: "İşYolum | Staj ve Çalışma Hayatını Düzenle",
   description: "İşYolum; staj günlerini, çalışma kayıtlarını, günlüklerini, belgelerini ve hatırlatıcılarını tek yerde yönetmeni sağlayan gizlilik odaklı mobil uygulamadır.",
   openGraph: {

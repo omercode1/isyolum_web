@@ -15,7 +15,7 @@ export function DemoVideo() {
             Uygulamayı Keşfet
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            İşYolum'un staj ve çalışma hayatınızı nasıl kolaylaştırdığını kısa bir demo ile izleyin.
+            İşYolum&apos;un staj ve çalışma hayatınızı nasıl kolaylaştırdığını kısa bir demo ile izleyin.
           </p>
         </div>
 

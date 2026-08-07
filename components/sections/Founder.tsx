@@ -37,7 +37,7 @@ export function Founder() {
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[9px] md:text-[10px] font-bold uppercase tracking-widest mb-3 md:mb-4">
                 <Sparkles className="w-3 h-3" />
-                <span>Founder's Note</span>
+                <span>Founder&apos;s Note</span>
               </div>
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-1 md:mb-2">
                 Ömer Faruk Temurtaş
@@ -49,7 +49,7 @@ export function Founder() {
               </p>
               
               <div className="relative">
-                <span className="text-4xl md:text-6xl text-primary/10 absolute -top-4 md:-top-6 -left-2 md:-left-4 font-serif leading-none">"</span>
+                <span className="text-4xl md:text-6xl text-primary/10 absolute -top-4 md:-top-6 -left-2 md:-left-4 font-serif leading-none">&quot;</span>
                 <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed italic relative z-10">
                   {t.founder.text}
                 </p>
