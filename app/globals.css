@@ -69,8 +69,11 @@
   * {
     @apply border-border;
   }
+  html {
+    overflow-x: clip;
+  }
   body {
-    @apply bg-background text-foreground antialiased transition-colors duration-500 ease-out;
+    @apply bg-background text-foreground antialiased transition-colors duration-500 ease-out overflow-x-clip;
   }
   
   /* Subtle Background Grid Pattern for modern look */
@@ -83,5 +86,37 @@
   .light .bg-grid-pattern {
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
                       linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  }
+}
+
+@layer utilities {
+  .tap-scale:active {
+    transform: scale(0.98);
+  }
+
+  @media (max-width: 767px) {
+    .animate-float,
+    .ambient-spin {
+      animation: none !important;
+    }
+
+    .hero-ambient-blur {
+      opacity: 0.35;
+      filter: blur(48px);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-ambient-blur {
+      filter: blur(120px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float,
+    .ambient-spin,
+    .animate-pulse {
+      animation: none !important;
+    }
   }
 }

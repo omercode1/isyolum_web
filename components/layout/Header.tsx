@@ -5,6 +5,9 @@ import { useLanguage } from "@/lib/i18n";
 import { useTheme } from "next-themes";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import * as motion from "motion/react-client";
+import { AnimatePresence } from "motion/react";
+import { useMotionPrefs } from "@/hooks/use-motion-prefs";
 
 export function Header() {
   const { t, language, setLanguage } = useLanguage();
@@ -12,6 +15,7 @@ export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const { prefersReducedMotion, isMobile } = useMotionPrefs();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -124,13 +128,21 @@ export function Header() {
       </div>
 
       {/* Mobile Nav */}
-      {mobileMenuOpen && (
-        <div id="mobile-menu" className="md:hidden bg-card/95 backdrop-blur-xl border border-border absolute top-[calc(100%+10px)] left-0 right-0 rounded-2xl py-4 px-4 flex flex-col gap-4 shadow-xl overflow-hidden">
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            id="mobile-menu"
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={prefersReducedMotion ? undefined : { opacity: 0, y: -8 }}
+            transition={{ duration: prefersReducedMotion ? 0.01 : isMobile ? 0.18 : 0.22 }}
+            className="md:hidden bg-card/95 backdrop-blur-xl border border-border absolute top-[calc(100%+10px)] left-0 right-0 rounded-2xl py-4 px-4 flex flex-col gap-4 shadow-xl max-h-[min(70dvh,calc(100dvh-8rem))] overflow-y-auto overscroll-contain"
+          >
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-xs font-bold uppercase tracking-widest text-foreground py-2 px-2 hover:bg-surface rounded-lg transition-colors"
+              className="text-xs font-bold uppercase tracking-widest text-foreground py-2 px-2 md:hover:bg-surface rounded-lg transition-colors tap-scale"
               onClick={(e) => handleNavClick(e, link.href)}
             >
               {link.name}
@@ -156,8 +168,9 @@ export function Header() {
               <a href="#early-access" onClick={(e) => handleNavClick(e, "#early-access")}>{t.nav.earlyAccess}</a>
             </Button>
           </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

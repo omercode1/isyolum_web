@@ -19,16 +19,16 @@ export function DemoVideo() {
           </p>
         </div>
 
-        <div className="relative max-w-4xl mx-auto rounded-2xl overflow-hidden border border-border shadow-2xl aspect-video bg-muted flex items-center justify-center group cursor-pointer transition-transform duration-500 hover:scale-[1.02] hover:shadow-primary/20">
+        <div className="relative max-w-4xl mx-auto rounded-2xl overflow-hidden border border-border shadow-2xl aspect-video bg-muted flex items-center justify-center group cursor-pointer transition-[transform,box-shadow] duration-500 md:hover:scale-[1.02] md:hover:shadow-primary/20 tap-scale">
           <Image
             src="https://picsum.photos/seed/demo/1920/1080"
             alt="Demo Video Thumbnail"
             fill
-            className="object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+            className="object-cover opacity-60 md:group-hover:opacity-80 transition-opacity duration-500"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
-          <div className="relative z-10 w-20 h-20 rounded-full bg-primary/90 text-primary-foreground flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-500 shadow-xl">
+          <div className="absolute inset-0 bg-black/40 md:group-hover:bg-black/20 transition-colors duration-500" />
+          <div className="relative z-10 w-20 h-20 rounded-full bg-primary/90 text-primary-foreground flex items-center justify-center backdrop-blur-sm md:group-hover:scale-110 transition-transform duration-500 shadow-xl">
             <Play className="w-8 h-8 ml-1" />
           </div>
         </div>

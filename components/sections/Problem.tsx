@@ -3,9 +3,20 @@
 import { useLanguage } from "@/lib/i18n";
 import { AlertCircle, CalendarOff, FileQuestion, Calculator, Clock, CheckSquare } from "lucide-react";
 import * as motion from "motion/react-client";
+import { useMotionPrefs } from "@/hooks/use-motion-prefs";
 
 export function Problem() {
   const { t } = useLanguage();
+  const {
+    hiddenFadeUp,
+    visibleFadeUp,
+    hiddenScale,
+    visibleScale,
+    viewport,
+    sectionDuration,
+    staggerDelay,
+    transition,
+  } = useMotionPrefs();
 
   const icons = [
     CalendarOff,
@@ -18,15 +29,15 @@ export function Problem() {
 
   return (
     <section id="problem" className="py-20 md:py-32 bg-surface/30 border-y border-border/50 scroll-mt-20 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-red-500/5 rounded-full blur-[80px] md:blur-[100px] -z-10 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[min(100vw,400px)] md:w-[600px] h-[min(100vw,400px)] md:h-[600px] bg-red-500/5 rounded-full blur-[48px] md:blur-[100px] -z-10 pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial={hiddenFadeUp}
+            whileInView={visibleFadeUp}
+            viewport={viewport}
+            transition={transition(0, sectionDuration)}
           >
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-4 md:mb-6">
               {t.problem.title}
@@ -43,19 +54,19 @@ export function Problem() {
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98], delay: (index % 3) * 0.1 }}
-                className="bg-card/50 backdrop-blur-sm p-6 md:p-8 rounded-[2rem] border border-border/60 flex flex-col gap-4 md:gap-5 group hover:border-red-500/30 hover:shadow-[0_8px_30px_rgba(239,68,68,0.1)] transition-all duration-500 ease-out"
+                initial={hiddenFadeUp}
+                whileInView={visibleFadeUp}
+                viewport={viewport}
+                transition={transition(staggerDelay(index % 3), sectionDuration)}
+                className="bg-card/50 backdrop-blur-sm p-6 md:p-8 rounded-[2rem] border border-border/60 flex flex-col gap-4 md:gap-5 group md:hover:border-red-500/30 md:hover:shadow-[0_8px_30px_rgba(239,68,68,0.1)] transition-[border-color,box-shadow] duration-500 ease-out tap-scale"
               >
                 <div className="flex items-center mb-1 md:mb-2">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 group-hover:bg-red-500 group-hover:text-white group-hover:shadow-lg group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-500 md:group-hover:bg-red-500 md:group-hover:text-white md:group-hover:shadow-lg md:group-hover:scale-110 md:group-hover:-rotate-3 transition-all duration-500">
                     <Icon className="w-4 h-4 md:w-5 md:h-5" />
                   </div>
                 </div>
                 
-                <h3 className="text-base md:text-lg font-bold text-foreground tracking-wide group-hover:text-red-500 transition-colors duration-300">
+                <h3 className="text-base md:text-lg font-bold text-foreground tracking-wide md:group-hover:text-red-500 transition-colors duration-300">
                   {card.title}
                 </h3>
                 
@@ -69,10 +80,10 @@ export function Problem() {
 
         <div className="mt-16 md:mt-20 text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial={hiddenScale}
+            whileInView={visibleScale}
+            viewport={viewport}
+            transition={transition(0, sectionDuration)}
           >
             <p className="text-xs md:text-sm font-semibold text-primary bg-primary/5 inline-flex items-center px-6 md:px-8 py-3 md:py-4 rounded-full border border-primary/20 shadow-sm leading-relaxed max-w-2xl">
               {t.problem.footer}

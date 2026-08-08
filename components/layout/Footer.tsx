@@ -34,13 +34,13 @@ export function Footer() {
           <div>
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-foreground mb-4">Connect</h4>
             <div className="flex gap-4">
-              <a href="#" className="w-8 h-8 rounded bg-surface border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-out">
+              <a href="#" className="w-8 h-8 rounded bg-surface border border-border flex items-center justify-center text-muted-foreground md:hover:text-primary md:hover:border-primary/50 md:hover:shadow-md md:hover:-translate-y-1 transition-[color,border-color,box-shadow,transform] duration-300 ease-out tap-scale">
                 <Globe className="w-4 h-4" />
               </a>
-              <a href="#" className="w-8 h-8 rounded bg-surface border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-out">
+              <a href="#" className="w-8 h-8 rounded bg-surface border border-border flex items-center justify-center text-muted-foreground md:hover:text-primary md:hover:border-primary/50 md:hover:shadow-md md:hover:-translate-y-1 transition-[color,border-color,box-shadow,transform] duration-300 ease-out tap-scale">
                 <Link className="w-4 h-4" />
               </a>
-              <a href="#" className="w-8 h-8 rounded bg-surface border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 hover:shadow-md hover:-translate-y-1 transition-all duration-300 ease-out">
+              <a href="#" className="w-8 h-8 rounded bg-surface border border-border flex items-center justify-center text-muted-foreground md:hover:text-primary md:hover:border-primary/50 md:hover:shadow-md md:hover:-translate-y-1 transition-[color,border-color,box-shadow,transform] duration-300 ease-out tap-scale">
                 <Mail className="w-4 h-4" />
               </a>
             </div>

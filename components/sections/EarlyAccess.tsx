@@ -4,9 +4,11 @@ import { useState } from "react";
 import { useLanguage } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import * as motion from "motion/react-client";
+import { useMotionPrefs } from "@/hooks/use-motion-prefs";
 
 export function EarlyAccess() {
   const { t, language } = useLanguage();
+  const { hiddenFadeUp, visibleFadeUp, viewport, transition, prefersReducedMotion } = useMotionPrefs();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error" | "inactive">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -56,14 +58,14 @@ export function EarlyAccess() {
       <div className="absolute inset-0 bg-primary/5 pointer-events-none -z-10" />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+          initial={hiddenFadeUp}
+          whileInView={visibleFadeUp}
+          viewport={viewport}
+          transition={transition(0)}
           className="bg-card/60 backdrop-blur-xl border border-border/50 p-6 sm:p-8 md:p-12 rounded-[2rem] flex flex-col gap-6 md:gap-8 shadow-2xl relative overflow-hidden mx-auto"
         >
           {/* Decorative blur */}
-          <div className="absolute -top-32 -right-32 w-64 h-64 bg-primary/20 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute -top-32 -right-32 w-48 md:w-64 h-48 md:h-64 bg-primary/20 rounded-full blur-[40px] md:blur-[80px] pointer-events-none" />
           
           <div className="text-center relative z-10">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-2 md:mb-3">
@@ -76,8 +78,9 @@ export function EarlyAccess() {
 
           {status === "success" ? (
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
+              transition={transition(0, 0.35)}
               role="status" aria-live="polite" 
               className="bg-primary/10 border border-primary/20 p-6 md:p-8 rounded-2xl text-center relative z-10"
             >
@@ -179,7 +182,7 @@ export function EarlyAccess() {
                 ></textarea>
               </div>
 
-              <label htmlFor="consent" className="flex items-start sm:items-center gap-2.5 md:gap-3 p-2 md:p-3 -ml-2 md:-ml-3 cursor-pointer group hover:bg-surface/40 rounded-xl transition-colors mt-1 md:mt-2">
+              <label htmlFor="consent" className="flex items-start sm:items-center gap-2.5 md:gap-3 p-2 md:p-3 -ml-2 md:-ml-3 cursor-pointer group md:hover:bg-surface/40 rounded-xl transition-colors mt-1 md:mt-2">
                 <input
                   type="checkbox"
                   id="consent"
@@ -190,7 +193,7 @@ export function EarlyAccess() {
                   aria-describedby={status === "error" ? "form-error" : undefined}
                   className="w-4 h-4 md:w-5 md:h-5 bg-surface border border-border rounded text-primary focus:ring-2 focus:ring-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background shrink-0 disabled:opacity-50 transition-all mt-0.5 sm:mt-0"
                 />
-                <span className="text-[10px] md:text-xs text-muted-foreground group-hover:text-foreground transition-colors select-none leading-relaxed">
+                <span className="text-[10px] md:text-xs text-muted-foreground md:group-hover:text-foreground transition-colors select-none leading-relaxed">
                   {t.form.consent}
                 </span>
               </label>
@@ -198,7 +201,7 @@ export function EarlyAccess() {
               <Button
                 type="submit"
                 disabled={status === "submitting"}
-                className="mt-2 md:mt-4 font-bold uppercase tracking-widest w-full h-12 md:h-14 rounded-xl disabled:opacity-70 text-xs md:text-sm shadow-[0_0_20px_rgba(37,99,235,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.4)] transition-shadow"
+                className="mt-2 md:mt-4 font-bold uppercase tracking-widest w-full h-12 md:h-14 rounded-xl disabled:opacity-70 text-xs md:text-sm shadow-[0_0_20px_rgba(37,99,235,0.2)] md:hover:shadow-[0_0_30px_rgba(37,99,235,0.4)] transition-shadow"
               >
                 {status === "submitting" ? t.form.submitting : t.form.submit}
               </Button>
