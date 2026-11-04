@@ -17,7 +17,30 @@ export const en: Dictionary = {
     subtitle: "Your data stays on your device. İşYolum organizes your work life, leaving you in control.",
     ctaPrimary: "Join Early Access",
     ctaSecondary: "Explore Features",
-    collaborationLink: "Support & Collaboration"
+    collaborationLink: "Support & Collaboration",
+    briefing: {
+      kicker: "SYS_BRIEFING",
+      title: "On-device architecture, word by word.",
+      note: "No vanity metrics. This briefing states İşYolum’s current privacy model.",
+      lead: "İşYolum keeps logs, documents, and work-day records primarily on the device.",
+      continuation: "OCR and search run on-device. Encrypted backup is not available yet.",
+      sourcesLabel: "local layers",
+      followUpsLabel: "Follow-ups",
+      copy: "Copy",
+      copied: "Copied",
+      retry: "Replay",
+      useful: "Useful",
+      notUseful: "Not useful",
+      sources: [
+        { name: "SQLCipher", domain: "LOCAL_DB", href: "#privacy" },
+        { name: "OCR", domain: "DEVICE_ONLY", href: "#features" },
+        { name: "Work Vault", domain: "APP_VAULT", href: "#privacy" }
+      ],
+      followUps: [
+        { text: "Where is data stored?", href: "#privacy" },
+        { text: "Which features are ready?", href: "#features" }
+      ]
+    }
   },
   problem: {
     title: "Why is managing internships and work so messy?",

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @theme {
   --color-background: var(--background);
@@ -17,6 +18,18 @@
   --color-muted-foreground: var(--muted-foreground);
 
   --color-border: var(--border);
+
+  --color-ink: var(--foreground);
+  --color-ink-2: var(--muted-foreground);
+  --color-ink-3: var(--muted-foreground);
+  --color-inset: var(--muted);
+  --color-hover: var(--surface);
+  --color-hover-2: var(--muted);
+  --color-line: var(--border);
+  --color-canvas: var(--background);
+
+  --radius-control: 8px;
+  --shadow-hairline: 0 0 0 1px var(--border);
 
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-heading: var(--font-playfair), ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
@@ -37,31 +50,31 @@
   }
   
   :root {
-    --background: #FFFFFF;
-    --foreground: #0F172A;
-    --card: #F8FAFC;
-    --card-foreground: #0F172A;
-    --surface: #F1F5F9;
-    --surface-foreground: #0F172A;
+    --background: #F7F9FF;
+    --foreground: #101B38;
+    --card: #FFFFFF;
+    --card-foreground: #101B38;
+    --surface: #EDF3FF;
+    --surface-foreground: #101B38;
     --primary: #2563EB;
     --primary-foreground: #FFFFFF;
-    --muted: #E2E8F0;
-    --muted-foreground: #64748B;
-    --border: #E2E8F0;
+    --muted: #DDE7F7;
+    --muted-foreground: #60708F;
+    --border: #D8E3F5;
   }
   
   .dark {
-    --background: #02040a; 
-    --foreground: #e2e8f0; 
-    --card: #090e17; 
+    --background: #030712;
+    --foreground: #e7edf9;
+    --card: #081224;
     --card-foreground: #f1f5f9; 
-    --surface: #0f172a; 
+    --surface: #0D1930;
     --surface-foreground: #f1f5f9; 
-    --primary: #3b82f6; 
+    --primary: #3B82F6;
     --primary-foreground: #ffffff;
-    --muted: #1e293b; 
-    --muted-foreground: #94a3b8; 
-    --border: #1e293b; 
+    --muted: #1C2A44;
+    --muted-foreground: #98A9C5;
+    --border: #1B2B46;
   }
 }
 
@@ -84,8 +97,8 @@
   }
   
   .light .bg-grid-pattern {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-image: linear-gradient(to right, rgba(37, 99, 235, 0.075) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(37, 99, 235, 0.075) 1px, transparent 1px);
   }
 }
 
@@ -118,5 +131,146 @@
     .animate-pulse {
       animation: none !important;
     }
+  }
+}
+
+@keyframes st-fade-in {
+  0% { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes st-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes st-fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .streaming-text * {
+    animation: none !important;
+  }
+}
+
+.dark-topography {
+  --topo-x: -20rem;
+  --topo-y: -20rem;
+  background: #030712;
+}
+
+.light .dark-topography {
+  display: none;
+}
+
+.dark .dark-topography {
+  display: block;
+}
+
+.light .light-aurora {
+  display: block;
+}
+
+.dark .light-aurora {
+  display: none;
+}
+
+.topography-spotlight {
+  mask-image: radial-gradient(250px circle at var(--topo-x) var(--topo-y), #000 0%, rgba(0, 0, 0, 0.92) 16%, transparent 74%);
+  -webkit-mask-image: radial-gradient(250px circle at var(--topo-x) var(--topo-y), #000 0%, rgba(0, 0, 0, 0.92) 16%, transparent 74%);
+  opacity: 0.95;
+}
+
+.light-aurora {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 49% 0%, rgba(255, 255, 255, 0.98), transparent 38%),
+    linear-gradient(145deg, #f8faff 0%, #f3f7ff 42%, #f9fbff 100%);
+}
+
+.aurora-orb {
+  position: absolute;
+  width: clamp(24rem, 42vw, 46rem);
+  aspect-ratio: 1;
+  border-radius: 9999px;
+  filter: blur(64px);
+  opacity: 0.58;
+  will-change: transform;
+}
+
+.aurora-orb-one {
+  left: -12%;
+  top: -11%;
+  background: rgba(96, 165, 250, 0.48);
+  animation: aurora-drift-one 16s ease-in-out infinite alternate;
+}
+
+.aurora-orb-two {
+  right: -15%;
+  top: 8%;
+  background: rgba(129, 140, 248, 0.34);
+  animation: aurora-drift-two 19s ease-in-out infinite alternate;
+}
+
+.aurora-orb-three {
+  bottom: -16%;
+  left: 18%;
+  background: rgba(45, 212, 191, 0.2);
+  animation: aurora-drift-three 21s ease-in-out infinite alternate;
+}
+
+.aurora-orb-four {
+  bottom: 8%;
+  right: 12%;
+  background: rgba(196, 181, 253, 0.28);
+  animation: aurora-drift-four 18s ease-in-out infinite alternate;
+}
+
+.light-noise {
+  opacity: 0.38;
+  background-image: radial-gradient(rgba(37, 99, 235, 0.14) 0.55px, transparent 0.6px);
+  background-size: 18px 18px;
+  mask-image: linear-gradient(to bottom, #000, transparent 88%);
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 88%);
+}
+
+@keyframes aurora-drift-one {
+  from { transform: translate3d(-6%, -5%, 0) scale(1); }
+  to { transform: translate3d(24%, 14%, 0) scale(1.16); }
+}
+
+@keyframes aurora-drift-two {
+  from { transform: translate3d(5%, -8%, 0) scale(1.04); }
+  to { transform: translate3d(-24%, 20%, 0) scale(1.2); }
+}
+
+@keyframes aurora-drift-three {
+  from { transform: translate3d(-4%, 8%, 0) scale(0.94); }
+  to { transform: translate3d(18%, -21%, 0) scale(1.18); }
+}
+
+@keyframes aurora-drift-four {
+  from { transform: translate3d(9%, 6%, 0) scale(0.88); }
+  to { transform: translate3d(-14%, -16%, 0) scale(1.14); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-orb {
+    animation: none;
   }
 }

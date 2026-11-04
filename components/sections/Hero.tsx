@@ -2,12 +2,21 @@
 
 import { useLanguage } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import {
+  ArrowRight,
+  Bell,
+  CalendarDays,
+  Check,
+  CheckCircle2,
+  FileCheck2,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 import * as motion from "motion/react-client";
 import { useMotionPrefs } from "@/hooks/use-motion-prefs";
 
 export function Hero() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const {
     isMobile,
     prefersReducedMotion,
@@ -20,155 +29,186 @@ export function Hero() {
     transition,
   } = useMotionPrefs();
 
+  const preview = language === "tr"
+    ? {
+        label: "Ürün önizlemesi",
+        greeting: "Bugün sırada ne var?",
+        progress: "Staj ilerlemen",
+        days: "18 / 40 gün",
+        plan: "Bugünün planı",
+        taskOne: "Günlük kaydını tamamla",
+        taskTwo: "İzin belgesini ekle",
+        complete: "Tamamlandı",
+        protected: "Cihazında korunur",
+        notification: "Günlük için hatırlatma hazır",
+        pdfReady: "PDF'e hazır kayıtlar",
+        weeklyPace: "Bu hafta ritmin yerinde.",
+        reportName: "Staj defteri · Ağustos",
+        exportReady: "PDF'e aktarılabilir",
+      }
+    : {
+        label: "Product preview",
+        greeting: "What’s next today?",
+        progress: "Internship progress",
+        days: "18 / 40 days",
+        plan: "Today’s plan",
+        taskOne: "Complete your daily log",
+        taskTwo: "Add leave document",
+        complete: "Complete",
+        protected: "Protected on your device",
+        notification: "Daily log reminder is ready",
+        pdfReady: "Records ready for PDF",
+        weeklyPace: "Your pace looks great this week.",
+        reportName: "Internship journal · August",
+        exportReady: "Ready to export as PDF",
+      };
+
   return (
-    <section className="relative min-h-[100svh] flex items-center pt-32 pb-16 md:pt-40 md:pb-32 overflow-hidden bg-grid-pattern">
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[min(100vw,400px)] md:w-[800px] h-[min(100vw,400px)] md:h-[800px] bg-primary/10 rounded-full hero-ambient-blur opacity-50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background" />
-      </div>
+    <section className="relative isolate overflow-hidden pb-20 pt-32 sm:pt-36 md:pb-28 lg:min-h-[760px] lg:pt-40">
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[34rem] bg-[radial-gradient(ellipse_at_70%_35%,rgba(37,99,235,0.2),transparent_52%),radial-gradient(ellipse_at_15%_65%,rgba(59,130,246,0.12),transparent_42%)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-background" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[1.03fr_0.97fr] lg:gap-16 lg:px-8">
+        <motion.div
+          initial={hiddenFadeUp}
+          animate={visibleFadeUp}
+          transition={transition(0, heroDuration)}
+          className="mx-auto flex max-w-2xl flex-col items-center text-center lg:mx-0 lg:items-start lg:text-left"
+        >
           <motion.div
-            initial={hiddenFadeUp}
-            animate={visibleFadeUp}
-            transition={transition(0, heroDuration)}
-            className="max-w-2xl mx-auto lg:mx-0 text-center lg:text-left flex flex-col items-center lg:items-start"
+            initial={prefersReducedMotion || isMobile ? hiddenFade : { opacity: 0, scale: 0.94 }}
+            animate={prefersReducedMotion || isMobile ? visibleFade : { opacity: 1, scale: 1 }}
+            transition={transition(heroDelay(0.15), isMobile ? 0.28 : 0.45)}
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-primary shadow-[0_0_24px_rgba(37,99,235,0.12)]"
           >
-            <motion.div 
-              initial={prefersReducedMotion || isMobile ? hiddenFade : { opacity: 0, scale: 0.9 }}
-              animate={prefersReducedMotion || isMobile ? visibleFade : { opacity: 1, scale: 1 }}
-              transition={transition(heroDelay(0.2), isMobile ? 0.3 : 0.5)}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-xs font-bold text-primary uppercase tracking-widest mb-6 lg:mb-8 shadow-[0_0_20px_rgba(37,99,235,0.15)]"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span>{t.hero.badge}</span>
-            </motion.div>
-            
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1] mb-6">
-              {t.hero.title.split(' ').map((word: string, i: number) => {
-                const isSpecial = i === t.hero.title.split(' ').length - 1;
-                return (
-                  <span key={i} className={`inline-block mr-[0.2em] ${isSpecial ? 'italic text-primary' : ''}`}>
-                    {word}
-                  </span>
-                )
-              })}
-            </h1>
-            
-            <motion.p 
-              initial={hiddenFade}
-              animate={visibleFade}
-              transition={transition(heroDelay(0.3), heroDuration)}
-              className="text-base sm:text-lg md:text-xl text-muted-foreground mb-4 max-w-lg leading-relaxed font-sans"
-            >
-              {t.hero.description}
-            </motion.p>
+            <Sparkles className="size-3.5" />
+            <span>{t.hero.badge}</span>
+          </motion.div>
 
-            <motion.p 
-              initial={hiddenFade}
-              animate={visibleFade}
-              transition={transition(heroDelay(0.4), heroDuration)}
-              className="text-xs sm:text-sm font-mono text-primary mb-8 lg:mb-10 max-w-lg tracking-wide uppercase"
-            >
-              {t.hero.subtitle}
-            </motion.p>
+          <h1 className="max-w-3xl text-4xl font-bold leading-[1.04] tracking-[-0.045em] text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+            {t.hero.title.split(" ").map((word: string, index: number, words: string[]) => (
+              <span
+                key={`${word}-${index}`}
+                className={index === words.length - 1 ? "mr-[0.18em] inline-block italic text-primary" : "mr-[0.18em] inline-block"}
+              >
+                {word}
+              </span>
+            ))}
+          </h1>
 
-            <motion.div 
-              initial={prefersReducedMotion ? hiddenFade : { opacity: 0, y: isMobile ? 12 : 20 }}
-              animate={prefersReducedMotion ? visibleFade : { opacity: 1, y: 0 }}
-              transition={transition(heroDelay(0.5), isMobile ? 0.35 : 0.5)}
-              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
-            >
-              <Button size="lg" className="w-full sm:w-auto h-14 px-8 text-base rounded-full shadow-[0_0_30px_rgba(37,99,235,0.3)] md:hover:shadow-[0_0_40px_rgba(37,99,235,0.5)] transition-shadow duration-300" asChild>
-                <a href="#early-access">
-                  {t.hero.ctaPrimary}
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </a>
-              </Button>
-              <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 text-base rounded-full border-border md:hover:bg-surface transition-colors duration-300" asChild>
-                <a href="#features">{t.hero.ctaSecondary}</a>
-              </Button>
-            </motion.div>
+          <motion.p
+            initial={hiddenFade}
+            animate={visibleFade}
+            transition={transition(heroDelay(0.28), heroDuration)}
+            className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+          >
+            {t.hero.description}
+          </motion.p>
+
+          <motion.div
+            initial={hiddenFade}
+            animate={visibleFade}
+            transition={transition(heroDelay(0.38), heroDuration)}
+            className="mt-5 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-medium text-muted-foreground lg:justify-start"
+          >
+            <span className="inline-flex items-center gap-1.5"><Check className="size-3.5 text-primary" /> {preview.protected}</span>
+            <span className="inline-flex items-center gap-1.5"><Check className="size-3.5 text-primary" /> {preview.pdfReady}</span>
           </motion.div>
 
           <motion.div
-            initial={prefersReducedMotion || isMobile ? hiddenFade : { opacity: 0, scale: 0.95, rotateY: 15 }}
-            animate={prefersReducedMotion || isMobile ? visibleFade : { opacity: 1, scale: 1, rotateY: 0 }}
-            transition={transition(heroDelay(0.3), isMobile ? 0.4 : 1)}
-            className="relative flex items-center justify-center md:perspective-[1200px] mt-8 lg:mt-0 max-w-full"
+            initial={prefersReducedMotion ? hiddenFade : { opacity: 0, y: isMobile ? 12 : 20 }}
+            animate={prefersReducedMotion ? visibleFade : { opacity: 1, y: 0 }}
+            transition={transition(heroDelay(0.5), isMobile ? 0.32 : 0.46)}
+            className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row"
           >
-            <div className="animate-float w-[85%] sm:w-full max-w-sm lg:max-w-md relative z-10 mx-auto">
-              <div className="relative w-full aspect-[9/16] bg-card/60 backdrop-blur-2xl border border-border/60 rounded-[2rem] p-4 sm:p-6 shadow-2xl flex flex-col overflow-hidden transition-[border-color,box-shadow] duration-500 md:hover:scale-[1.02] md:hover:border-primary/40 group tap-scale">
-                
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 md:group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            <Button size="lg" className="h-14 rounded-full px-7 text-base shadow-[0_10px_32px_rgba(37,99,235,0.3)] transition-shadow hover:shadow-[0_14px_40px_rgba(37,99,235,0.46)]" asChild>
+              <a href="#early-access">
+                {t.hero.ctaPrimary}
+                <ArrowRight className="ml-2 size-4.5" />
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" className="h-14 rounded-full px-7 text-base" asChild>
+              <a href="#demo">{t.hero.ctaSecondary}</a>
+            </Button>
+          </motion.div>
+        </motion.div>
 
-                <div className="absolute top-3 left-1/2 -translate-x-1/2 w-24 sm:w-32 h-1.5 bg-foreground/10 rounded-full" />
-                
-                <div className="mt-6 sm:mt-8 flex-1 flex flex-col gap-4 sm:gap-6">
-                  <div className="flex items-center justify-between pb-3 sm:pb-4 border-b border-border/50">
-                    <div className="text-[10px] sm:text-xs text-foreground font-semibold tracking-wide">Workspace</div>
-                    <div className="flex items-center gap-1.5 sm:gap-2 px-2 py-1 rounded-full bg-primary/10 border border-primary/20">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
-                      <span className="text-[8px] sm:text-[9px] font-bold text-primary uppercase tracking-widest">LIVE</span>
-                    </div>
-                  </div>
-                  
-                  <div className="p-4 sm:p-5 bg-surface/50 rounded-2xl border border-border/50 shadow-inner">
-                    <div className="text-[9px] sm:text-[10px] text-muted-foreground font-bold uppercase tracking-widest mb-2 sm:mb-3">Overall Progress</div>
-                    <div className="flex items-end gap-2 mb-2 sm:mb-3">
-                      <span className="text-3xl sm:text-4xl font-serif text-foreground leading-none">12</span>
-                      <span className="text-[10px] sm:text-xs font-medium text-primary mb-1">/ 40 DAYS</span>
-                    </div>
-                    <div className="h-1.5 sm:h-2 w-full bg-background rounded-full overflow-hidden shadow-inner">
-                      {prefersReducedMotion || isMobile ? (
-                        <div className="h-full w-[30%] bg-primary rounded-full" />
-                      ) : (
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          animate={{ width: "30%" }}
-                          transition={transition(heroDelay(1), 1.5)}
-                          className="h-full bg-primary rounded-full" 
-                        />
-                      )}
-                    </div>
-                  </div>
+        <motion.div
+          initial={prefersReducedMotion || isMobile ? hiddenFade : { opacity: 0, y: 20, scale: 0.97 }}
+          animate={prefersReducedMotion || isMobile ? visibleFade : { opacity: 1, y: 0, scale: 1 }}
+          transition={transition(heroDelay(0.25), isMobile ? 0.4 : 0.75)}
+          className="relative mx-auto w-full max-w-[35rem] lg:mx-0 lg:max-w-none"
+        >
+          <div className="absolute -right-8 top-16 hidden size-36 rounded-full bg-primary/20 blur-3xl sm:block" />
+          <div className="absolute -bottom-6 left-4 size-40 rounded-full bg-sky-400/10 blur-3xl" />
 
-                  <div className="flex-1 flex flex-col gap-2 sm:gap-3">
-                    {[1, 2, 3].map((i) => (
-                      <motion.div 
-                        initial={prefersReducedMotion ? hiddenFade : { opacity: 0, x: isMobile ? 8 : 20 }}
-                        animate={visibleFade}
-                        transition={transition(heroDelay(0.8 + (i * 0.1)), isMobile ? 0.3 : 0.5)}
-                        key={i} 
-                        className="p-3 sm:p-4 bg-surface/40 rounded-2xl border border-border/40 flex items-center gap-3 sm:gap-4 md:hover:bg-surface/80 transition-colors cursor-pointer tap-scale"
-                      >
-                        <div className={`h-8 w-8 sm:h-10 sm:w-10 rounded-xl flex items-center justify-center flex-shrink-0 ${i === 1 ? 'bg-primary/20 text-primary' : 'bg-background border border-border/50 text-muted-foreground'}`}>
-                          <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
-                        </div>
-                        <div className="flex-1 flex flex-col gap-1.5 sm:gap-2">
-                          <div className={`h-2 sm:h-2.5 rounded-full ${i === 1 ? 'w-3/4 bg-foreground/80' : 'w-2/3 bg-muted-foreground/40'}`} />
-                          <div className="h-1 sm:h-1.5 w-1/2 bg-muted-foreground/20 rounded-full" />
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
+          <div className="relative rounded-[2rem] border border-border/70 bg-card/75 p-3 shadow-[0_28px_85px_rgba(0,0,0,0.28)] backdrop-blur-2xl sm:p-4">
+            <div className="overflow-hidden rounded-[1.45rem] border border-border/70 bg-background/80 p-4 sm:p-5">
+              <div className="flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-primary">{preview.label}</p>
+                  <h2 className="mt-1 text-lg font-semibold tracking-tight text-foreground sm:text-xl">{preview.greeting}</h2>
                 </div>
-                
-                <div className="h-12 sm:h-14 mt-3 sm:mt-4 bg-background/50 backdrop-blur-md rounded-2xl border border-border/50 flex items-center justify-around px-2 shadow-lg">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className={`h-8 w-8 sm:h-10 sm:w-10 flex items-center justify-center rounded-xl transition-colors ${i === 1 ? 'bg-primary text-primary-foreground shadow-md' : 'text-muted-foreground md:hover:bg-surface'}`}>
-                      <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-sm ${i===1 ? 'bg-current' : 'border-2 border-current'}`} />
-                    </div>
-                  ))}
+                <div className="flex size-10 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10 text-primary">
+                  <Bell className="size-4.5" />
                 </div>
               </div>
-            </div>
 
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] max-w-[120%] h-[110%] bg-primary/20 rounded-full blur-[60px] md:blur-[100px] -z-10 pointer-events-none" />
-          </motion.div>
-        </div>
+              <div className="mt-5 grid gap-3 sm:grid-cols-[0.95fr_1.05fr]">
+                <div className="rounded-2xl border border-border bg-surface/55 p-4">
+                  <div className="flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                    <span>{preview.progress}</span>
+                    <CalendarDays className="size-3.5 text-primary" />
+                  </div>
+                  <div className="mt-4 flex items-center gap-3">
+                    <div className="grid size-[4.6rem] place-items-center rounded-full bg-[conic-gradient(var(--primary)_0deg_162deg,rgba(148,163,184,0.18)_162deg_360deg)] p-1">
+                      <div className="grid size-full place-items-center rounded-full bg-card text-sm font-bold text-foreground">45%</div>
+                    </div>
+                    <div>
+                      <p className="text-xl font-semibold text-foreground">{preview.days}</p>
+                      <p className="mt-1 text-xs text-muted-foreground">{preview.weeklyPace}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-border bg-card p-4 shadow-sm">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-semibold text-foreground">{preview.plan}</p>
+                    <span className="rounded-full bg-emerald-500/10 px-2 py-1 text-[9px] font-bold uppercase tracking-wider text-emerald-500">2 / 3</span>
+                  </div>
+                  <div className="mt-3 space-y-2.5">
+                    <div className="flex items-center gap-2.5 rounded-xl bg-primary/7 p-2.5">
+                      <span className="grid size-5 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground"><Check className="size-3" /></span>
+                      <span className="text-xs font-medium text-foreground">{preview.taskOne}</span>
+                    </div>
+                    <div className="flex items-center gap-2.5 p-2.5">
+                      <span className="size-5 shrink-0 rounded-full border border-border" />
+                      <span className="text-xs text-muted-foreground">{preview.taskTwo}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-3 flex items-center gap-3 rounded-2xl border border-border/70 bg-surface/35 p-3">
+                <div className="grid size-9 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary"><FileCheck2 className="size-4" /></div>
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-xs font-semibold text-foreground">{preview.reportName}</p>
+                  <p className="mt-0.5 text-[11px] text-muted-foreground">{preview.complete} · {preview.exportReady}</p>
+                </div>
+                <CheckCircle2 className="size-4.5 shrink-0 text-emerald-500" />
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute -bottom-5 -left-4 hidden max-w-56 items-center gap-3 rounded-2xl border border-border/70 bg-card/90 p-3 shadow-xl backdrop-blur-xl sm:flex">
+            <span className="grid size-8 shrink-0 place-items-center rounded-xl bg-emerald-500/10 text-emerald-500"><CheckCircle2 className="size-4" /></span>
+            <p className="text-[11px] font-medium leading-relaxed text-foreground">{preview.notification}</p>
+          </div>
+          <div className="absolute -right-4 -top-4 hidden items-center gap-2 rounded-full border border-border/70 bg-card/90 px-3 py-2 text-[10px] font-bold text-foreground shadow-lg backdrop-blur-xl sm:flex">
+            <ShieldCheck className="size-3.5 text-primary" />
+            {preview.protected}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

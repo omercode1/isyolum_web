@@ -26,7 +26,7 @@ export function FAQ() {
     : { duration: isMobile ? 0.2 : 0.3, ease: [0.21, 0.47, 0.32, 0.98] as const };
 
   return (
-    <section className="py-16 md:py-24 bg-surface/30 border-t border-border overflow-hidden">
+    <section id="faq" className="py-16 md:py-24 bg-surface/30 border-t border-border overflow-hidden scroll-mt-20">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 flex flex-col items-center">
           <div className="text-[10px] text-primary font-bold uppercase tracking-widest mb-2 flex items-center gap-2">

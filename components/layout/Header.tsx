@@ -11,7 +11,7 @@ import { useMotionPrefs } from "@/hooks/use-motion-prefs";
 
 export function Header() {
   const { t, language, setLanguage } = useLanguage();
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -40,10 +40,16 @@ export function Header() {
     setLanguage(language === "tr" ? "en" : "tr");
   };
 
+  const isDarkTheme = (resolvedTheme ?? theme) === "dark";
+  const themeToggleTransition = prefersReducedMotion
+    ? { duration: 0.01 }
+    : { type: "spring" as const, stiffness: 420, damping: 26 };
+
   const navLinks = [
+    { name: t.nav.internship, href: "#demo" },
     { name: t.nav.features, href: "#features" },
     { name: t.nav.privacy, href: "#privacy" },
-    { name: t.nav.collaboration, href: "#collaboration" },
+    { name: t.faq.title, href: "#faq" },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -63,7 +69,7 @@ export function Header() {
       className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[95%] max-w-5xl rounded-full ${
         isScrolled
           ? "bg-background/80 backdrop-blur-xl border border-border shadow-lg py-2 px-4 md:px-6"
-          : "bg-transparent py-4 px-4 md:px-6 border border-transparent"
+          : "bg-background/55 backdrop-blur-xl border border-border/70 shadow-[0_10px_34px_rgba(15,23,42,0.07)] py-3 px-4 md:px-6"
       }`}
     >
       <div className="flex items-center justify-between">
@@ -101,10 +107,22 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              aria-label="Toggle Theme"
+              onClick={() => setTheme(isDarkTheme ? "light" : "dark")}
+              aria-label={isDarkTheme ? "Açık temaya geç" : "Koyu temaya geç"}
+              aria-pressed={isDarkTheme}
+              className="relative h-9 w-[4.5rem] overflow-hidden rounded-full border border-border/80 bg-surface/75 p-0 shadow-inner hover:bg-surface"
             >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              <span className="absolute inset-0 bg-[radial-gradient(circle_at_25%_30%,rgba(250,204,21,0.23),transparent_28%),radial-gradient(circle_at_74%_72%,rgba(59,130,246,0.34),transparent_31%)]" />
+              <Sun aria-hidden="true" className="absolute left-2 h-3.5 w-3.5 text-amber-500/75" />
+              <Moon aria-hidden="true" className="absolute right-2 h-3.5 w-3.5 text-primary/75" />
+              <motion.span
+                initial={false}
+                animate={{ x: isDarkTheme ? 34 : 0, rotate: isDarkTheme ? 22 : 0 }}
+                transition={themeToggleTransition}
+                className="absolute left-1 grid size-7 place-items-center rounded-full bg-background text-foreground shadow-md"
+              >
+                {isDarkTheme ? <Moon className="h-3.5 w-3.5" /> : <Sun className="h-3.5 w-3.5" />}
+              </motion.span>
             </Button>
           )}
           <Button asChild className="rounded-full">
@@ -159,8 +177,13 @@ export function Header() {
                 </Button>
               </div>
               {mounted && (
-                <Button variant="outline" size="sm" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-                  {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setTheme(isDarkTheme ? "light" : "dark")}
+                  aria-label={isDarkTheme ? "Açık temaya geç" : "Koyu temaya geç"}
+                >
+                  {isDarkTheme ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                 </Button>
               )}
             </div>

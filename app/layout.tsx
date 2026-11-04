@@ -34,7 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="tr" suppressHydrationWarning>
-      <body className={`${jakarta.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground overflow-x-hidden`} suppressHydrationWarning>
+      <body className={`${jakarta.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground overflow-x-clip`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <LanguageProvider>
             {children}

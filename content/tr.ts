@@ -15,7 +15,30 @@ export const tr = {
     subtitle: "Verilerin cihazında kalır. İşYolum iş hayatını düzenler, kontrolü sende bırakır.",
     ctaPrimary: "Erken Erişime Katıl",
     ctaSecondary: "Özellikleri İncele",
-    collaborationLink: "Destek ve İş Birliği"
+    collaborationLink: "Destek ve İş Birliği",
+    briefing: {
+      kicker: "SYS_BRIEFING",
+      title: "Cihaz içi mimari, kelime kelime.",
+      note: "Hazır istatistik yok. Bu özet, İşYolum’un bugünkü gizlilik modelini anlatır.",
+      lead: "İşYolum günlük, belge ve iş günü kayıtlarını temel olarak cihazında tutar.",
+      continuation: "OCR ve arama cihaz içinde çalışır. Şifreli yedekleme henüz yok.",
+      sourcesLabel: "yerel katman",
+      followUpsLabel: "Devam",
+      copy: "Kopyala",
+      copied: "Kopyalandı",
+      retry: "Yeniden oynat",
+      useful: "Faydalı",
+      notUseful: "Faydalı değil",
+      sources: [
+        { name: "SQLCipher", domain: "LOCAL_DB", href: "#privacy" },
+        { name: "OCR", domain: "DEVICE_ONLY", href: "#features" },
+        { name: "İş Kasası", domain: "APP_VAULT", href: "#privacy" }
+      ],
+      followUps: [
+        { text: "Veriler nerede tutulur?", href: "#privacy" },
+        { text: "Hangi özellikler hazır?", href: "#features" }
+      ]
+    }
   },
   problem: {
     title: "Staj ve çalışma süresi neden bu kadar dağınık?",

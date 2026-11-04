@@ -1,7 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/lib/i18n";
-import { ShieldCheck, Database, FileKey2, Smartphone, Search, Fingerprint } from "lucide-react";
+import { ArrowRight, Check, Database, FileKey2, Fingerprint, Search, ShieldCheck, Smartphone } from "lucide-react";
 import * as motion from "motion/react-client";
 import { useMotionPrefs } from "@/hooks/use-motion-prefs";
 
@@ -10,87 +10,108 @@ export function Privacy() {
   const {
     hiddenFadeLeft,
     visibleFadeLeft,
-    hiddenScale,
-    visibleScale,
+    hiddenFadeUp,
+    visibleFadeUp,
     viewport,
     sectionDuration,
     transition,
   } = useMotionPrefs();
 
-  const icons = [Database, FileKey2, Smartphone, Search, Fingerprint, ShieldCheck];
+  const labels = language === "tr"
+    ? {
+        eyebrow: "GİZLİLİK ÖNCE GELİR",
+        device: "Senin cihazın",
+        deviceNote: "Kayıtların burada kalır",
+        entries: "Günlükler",
+        files: "Belgeler",
+        search: "Arama",
+        local: "Cihaz içinde",
+        note: "Bilmen gereken",
+      }
+    : {
+        eyebrow: "PRIVACY COMES FIRST",
+        device: "Your device",
+        deviceNote: "Your records stay here",
+        entries: "Daily logs",
+        files: "Documents",
+        search: "Search",
+        local: "On your device",
+        note: "Good to know",
+      };
+  const itemIcons = [Database, FileKey2, Smartphone, Search, Fingerprint, ShieldCheck];
+  const flowItems = [
+    { label: labels.entries, Icon: FileKey2 },
+    { label: labels.files, Icon: Database },
+    { label: labels.search, Icon: Search },
+  ];
 
   return (
-    <section id="privacy" className="py-16 md:py-24 bg-surface/30 border-y border-border overflow-hidden scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          
-          <motion.div
-            initial={hiddenFadeLeft}
-            whileInView={visibleFadeLeft}
-            viewport={viewport}
-            transition={transition(0, sectionDuration)}
-          >
-            <div className="inline-flex items-center gap-2 px-2 py-1 rounded bg-surface border border-primary/30 text-primary text-[10px] font-bold uppercase tracking-widest mb-6">
-              <ShieldCheck className="w-3 h-3" />
-              <span>SECURE_LOCAL_ENV</span>
+    <section id="privacy" className="relative overflow-hidden border-y border-border/60 bg-surface/25 py-20 md:py-28 scroll-mt-20">
+      <div className="pointer-events-none absolute -right-40 top-1/2 -z-10 size-[32rem] -translate-y-1/2 rounded-full bg-primary/10 blur-[130px]" />
+      <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-20 lg:px-8">
+        <motion.div
+          initial={hiddenFadeLeft}
+          whileInView={visibleFadeLeft}
+          viewport={viewport}
+          transition={transition(0, sectionDuration)}
+        >
+          <p className="text-[10px] font-bold tracking-[0.2em] text-primary">{labels.eyebrow}</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground md:text-5xl">{t.privacy.title}</h2>
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground md:text-base">{t.privacy.description}</p>
+
+          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+            {t.privacy.items.map((item, index) => {
+              const Icon = itemIcons[index];
+              return (
+                <li key={item} className="flex items-start gap-3 rounded-2xl border border-border/70 bg-card/55 p-3.5">
+                  <span className="grid size-8 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary"><Icon className="size-4" /></span>
+                  <span className="pt-1 text-xs font-medium leading-relaxed text-foreground">{item}</span>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="mt-6 rounded-2xl border border-amber-500/20 bg-amber-500/7 p-4">
+            <p className="text-xs leading-relaxed text-amber-600 dark:text-amber-400"><span className="mr-2 font-bold">{labels.note}:</span>{t.privacy.note}</p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={hiddenFadeUp}
+          whileInView={visibleFadeUp}
+          viewport={viewport}
+          transition={transition(0.12, sectionDuration)}
+          className="relative mx-auto w-full max-w-xl"
+        >
+          <div className="relative overflow-hidden rounded-[2rem] border border-border/70 bg-card/75 p-5 shadow-[0_24px_65px_rgba(0,0,0,0.17)] backdrop-blur-xl sm:p-7">
+            <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-primary/70 to-transparent" />
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <span className="grid size-10 place-items-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20"><ShieldCheck className="size-5" /></span>
+                <div><p className="text-sm font-semibold text-foreground">{labels.device}</p><p className="mt-0.5 text-[11px] text-muted-foreground">{labels.deviceNote}</p></div>
+              </div>
+              <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-emerald-500">{labels.local}</span>
             </div>
-            
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-6 uppercase">
-              {t.privacy.title}
-            </h2>
-            
-            <p className="text-sm text-muted-foreground mb-8 leading-relaxed font-mono">
-              {t.privacy.description}
-            </p>
 
-            <ul className="space-y-4 mb-8">
-              {t.privacy.items.map((item, index) => {
-                const Icon = icons[index % icons.length];
-                return (
-                  <li key={index} className="flex items-center gap-3 group p-2 -ml-2 rounded md:hover:bg-surface/50 transition-colors duration-300">
-                    <div className="w-8 h-8 rounded bg-surface border border-border flex items-center justify-center text-primary flex-shrink-0 md:group-hover:bg-primary md:group-hover:text-primary-foreground md:group-hover:border-primary transition-colors duration-300">
-                      <Icon className="w-4 h-4" />
-                    </div>
-                    <span className="text-sm text-foreground font-mono md:group-hover:text-primary transition-colors duration-300">{item}</span>
-                  </li>
-                );
-              })}
-            </ul>
-
-            <div className="p-4 rounded bg-surface border border-border border-l-4 border-l-amber-500 md:hover:border-l-amber-400 transition-colors duration-300">
-              <p className="text-[10px] text-amber-500 font-mono uppercase tracking-widest">
-                {language === "tr" ? "DİKKAT! :" : "WARNING_NOTE:"} {t.privacy.note}
-              </p>
+            <div className="relative mt-8 grid grid-cols-3 gap-2 sm:gap-3">
+              {flowItems.map(({ label, Icon }, index) => (
+                <div key={label} className="relative flex min-w-0 flex-col items-center rounded-2xl border border-border/70 bg-background/70 px-2 py-4 text-center">
+                  <span className="grid size-9 place-items-center rounded-xl bg-surface text-primary"><Icon className="size-4" /></span>
+                  <p className="mt-2 text-[10px] font-semibold leading-tight text-foreground">{label}</p>
+                  {index < flowItems.length - 1 && <ArrowRight className="absolute -right-3 top-1/2 z-10 hidden size-4 -translate-y-1/2 rounded-full bg-card p-0.5 text-primary sm:block" />}
+                </div>
+              ))}
             </div>
-          </motion.div>
 
-          <motion.div
-            initial={hiddenScale}
-            whileInView={visibleScale}
-            viewport={viewport}
-            transition={transition(0, sectionDuration)}
-            className="relative group max-w-full"
-          >
-            <div className="aspect-square max-w-md mx-auto relative rounded-full border border-border bg-surface/50 flex items-center justify-center p-8 transition-transform duration-700 ease-out md:group-hover:scale-[1.02]">
-              <div className="absolute inset-0 rounded-full border border-primary/20 border-dashed ambient-spin animate-[spin_20s_linear_infinite]" />
-              <div className="absolute inset-4 rounded-full border border-primary/10 ambient-spin animate-[spin_15s_linear_infinite_reverse]" />
-              
-              <div className="relative w-48 h-64 bg-card border border-border rounded p-4 flex flex-col items-center justify-center gap-4 z-10">
-                <ShieldCheck className="w-12 h-12 text-primary" />
-                <div className="text-center">
-                  <div className="text-xs font-bold text-foreground uppercase tracking-widest">Local Storage</div>
-                  <div className="text-[10px] font-mono text-muted-foreground mt-1">Encrypted (SQLCipher)</div>
-                </div>
-                <div className="w-full space-y-2 mt-4 font-mono text-[8px] text-primary/50 text-center leading-tight">
-                  <div>0x4F 0x2A 0x11 ...</div>
-                  <div>0x9B 0x7C 0x33 ...</div>
-                  <div>0x1A 0x8F 0x44 ...</div>
-                </div>
+            <div className="mt-5 rounded-2xl border border-primary/20 bg-primary/7 p-4">
+              <div className="flex items-center gap-3">
+                <div className="grid size-11 shrink-0 place-items-center rounded-full border border-primary/25 bg-background text-primary"><Fingerprint className="size-5" /></div>
+                <div className="min-w-0 flex-1"><p className="text-xs font-semibold text-foreground">{language === "tr" ? "Kontrol sende kalır" : "You stay in control"}</p><p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">{language === "tr" ? "Günlükler, belgeler ve arama akışı; anlatılan modelde cihaz içinde çalışır." : "Daily logs, documents, and search operate on-device in the stated model."}</p></div>
+                <Check className="size-4 shrink-0 text-emerald-500" />
               </div>
             </div>
-          </motion.div>
-
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
