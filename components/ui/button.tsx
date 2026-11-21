@@ -3,19 +3,22 @@ import { Slot } from "@radix-ui/react-slot"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = {
-  default: "bg-primary text-primary-foreground hover:bg-primary/90",
+  default:
+    "bg-primary text-primary-foreground border border-primary/20 shadow-[0_8px_24px_-4px_rgba(37,99,235,0.4),inset_0_1px_0_rgba(255,255,255,0.22)] hover:bg-primary/92 hover:shadow-[0_12px_30px_-4px_rgba(37,99,235,0.52)]",
   destructive: "bg-red-500 text-white hover:bg-red-500/90",
-  outline: "border border-border bg-transparent hover:bg-surface hover:text-foreground",
-  secondary: "bg-surface text-foreground hover:bg-surface/80",
-  ghost: "hover:bg-surface hover:text-foreground",
+  outline:
+    "border border-border bg-card/90 text-foreground shadow-sm backdrop-blur-md hover:border-primary/45 hover:bg-surface hover:text-primary",
+  secondary:
+    "border border-primary/20 bg-primary/10 text-primary shadow-sm hover:bg-primary hover:text-primary-foreground",
+  ghost: "text-muted-foreground hover:bg-surface hover:text-foreground",
   link: "text-primary underline-offset-4 hover:underline",
 }
 
 const sizeVariants = {
-  default: "h-10 px-4 py-2",
-  sm: "h-9 rounded-md px-3",
-  lg: "h-11 rounded-md px-8",
-  icon: "h-10 w-10",
+  default: "h-10 px-4 py-2 rounded-xl",
+  sm: "h-9 rounded-xl px-3.5 text-xs",
+  lg: "h-12 rounded-2xl px-7 text-sm sm:text-base",
+  icon: "h-10 w-10 rounded-xl",
 }
 
 export interface ButtonProps
@@ -31,7 +34,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp
         className={cn(
-          "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-[transform,box-shadow,background-color,color] duration-300 ease-out md:hover:-translate-y-0.5 md:hover:shadow-md active:translate-y-0 active:scale-[0.98] md:active:scale-95 active:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+          "inline-flex items-center justify-center whitespace-nowrap font-semibold ring-offset-background transition-[transform,box-shadow,background-color,border-color,color] duration-200 ease-out md:hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
           buttonVariants[variant],
           sizeVariants[size],
           className

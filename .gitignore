@@ -32,3 +32,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# large release binaries (hosted via GitHub Releases)
+/public/downloads/*.apk
+/public/downloads/*.aab
+
+.vercel
+.env*

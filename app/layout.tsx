@@ -5,25 +5,36 @@ import { ThemeProvider } from "next-themes";
 import { LanguageProvider } from "@/lib/i18n";
 import { getMetadataBase } from "@/lib/site-url";
 
-const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair", style: ["normal", "italic"] });
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin", "latin-ext"], variable: "--font-jakarta" });
+const playfair = Playfair_Display({ subsets: ["latin", "latin-ext"], variable: "--font-playfair", style: ["normal", "italic"] });
 
 export const metadata: Metadata = {
   metadataBase: getMetadataBase(),
-  title: "İşYolum | Staj ve Çalışma Hayatını Düzenle",
-  description: "İşYolum; staj günlerini, çalışma kayıtlarını, günlüklerini, belgelerini ve hatırlatıcılarını tek yerde yönetmeni sağlayan gizlilik odaklı mobil uygulamadır.",
+  applicationName: "İşYolum",
+  title: "İşYolum | İş, Staj ve Kariyer Kayıtlarını Düzenle",
+  description: "İş günlerini ve kalan çalışma saatini takip et; günlük, başvuru, belge ve kariyer kayıtlarını İşYolum'da düzenle.",
+  keywords: ["İşYolum", "staj takibi", "çalışma saati takibi", "staj defteri", "başvuru takibi", "kariyer hafızası"],
   openGraph: {
-    title: "İşYolum | Staj ve Çalışma Hayatını Düzenle",
-    description: "İşYolum; staj günlerini, çalışma kayıtlarını, günlüklerini, belgelerini ve hatırlatıcılarını tek yerde yönetmeni sağlayan gizlilik odaklı mobil uygulamadır.",
+    title: "İşYolum | İş, Staj ve Kariyer Kayıtlarını Düzenle",
+    description: "İş günlerini ve kalan çalışma saatini takip et; günlük, başvuru, belge ve kariyer kayıtlarını İşYolum'da düzenle.",
     url: "/",
     siteName: "İşYolum",
     locale: "tr_TR",
     type: "website",
+    images: [
+      {
+        url: "/images/store/feature-graphic.png",
+        width: 1024,
+        height: 500,
+        alt: "İşYolum — Tüm çalışma hayatın, tek bir yerde",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "İşYolum | Staj ve Çalışma Hayatını Düzenle",
-    description: "İşYolum; staj günlerini, çalışma kayıtlarını, günlüklerini, belgelerini ve hatırlatıcılarını tek yerde yönetmeni sağlayan gizlilik odaklı mobil uygulamadır.",
+    title: "İşYolum | İş, Staj ve Kariyer Kayıtlarını Düzenle",
+    description: "İş günlerini ve kalan çalışma saatini takip et; günlük, başvuru, belge ve kariyer kayıtlarını İşYolum'da düzenle.",
+    images: ["/images/store/feature-graphic.png"],
   },
 };
 
@@ -38,7 +49,6 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <LanguageProvider>
             {children}
-            <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[-1]" style={{ backgroundImage: "radial-gradient(#fff 1px, transparent 1px)", backgroundSize: "20px 20px" }}></div>
           </LanguageProvider>
         </ThemeProvider>
       </body>

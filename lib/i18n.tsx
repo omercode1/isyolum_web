@@ -22,10 +22,12 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     if (storedLang && (storedLang === "tr" || storedLang === "en")) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setLanguage(storedLang);
+      document.documentElement.lang = storedLang;
     } else {
       const browserLang = navigator.language.split("-")[0];
       if (browserLang === "tr" || browserLang === "en") {
         setLanguage(browserLang as Language);
+        document.documentElement.lang = browserLang;
       }
     }
   }, []);

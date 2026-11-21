@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { useReducedMotion } from "motion/react";
-import * as motion from "motion/react-client";
 
 const CONTOURS = [
   "M-180 136C-84 44 8 65 100 138C189 208 255 187 365 78C458 -12 568 5 666 94C758 177 839 186 973 62C1109 -64 1237 -18 1365 102C1454 185 1555 194 1665 81",
@@ -23,8 +22,9 @@ export function ThemeAtmosphere() {
     let frame = 0;
     const updatePointer = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") return;
-      cancelAnimationFrame(frame);
+      if (frame) return;
       frame = requestAnimationFrame(() => {
+        frame = 0;
         const element = atmosphereRef.current;
         if (!element) return;
         element.style.setProperty("--topo-x", `${event.clientX}px`);
@@ -34,7 +34,7 @@ export function ThemeAtmosphere() {
 
     window.addEventListener("pointermove", updatePointer, { passive: true });
     return () => {
-      cancelAnimationFrame(frame);
+      if (frame) cancelAnimationFrame(frame);
       window.removeEventListener("pointermove", updatePointer);
     };
   }, [prefersReducedMotion]);
@@ -42,32 +42,28 @@ export function ThemeAtmosphere() {
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-[-20] overflow-hidden">
       <div ref={atmosphereRef} className="dark-topography hidden size-full dark:block">
-        <svg viewBox="0 0 1440 680" preserveAspectRatio="none" className="absolute inset-0 size-full opacity-80">
-          {CONTOURS.map((path, index) => (
-            <motion.path
+        <svg viewBox="0 0 1440 680" preserveAspectRatio="none" className="absolute inset-0 size-full opacity-70">
+          {CONTOURS.map((path) => (
+            <path
               key={path}
               d={path}
               fill="none"
-              stroke="rgba(96,165,250,0.2)"
+              stroke="rgba(96,165,250,0.16)"
               strokeWidth="1.15"
               strokeDasharray="8 14"
-              initial={{ strokeDashoffset: 0 }}
-              animate={prefersReducedMotion ? undefined : { strokeDashoffset: [-240 - index * 16, 0] }}
-              transition={{ duration: 24 + index * 2.5, repeat: Infinity, ease: "linear" }}
             />
           ))}
         </svg>
         <svg viewBox="0 0 1440 680" preserveAspectRatio="none" className="topography-spotlight absolute inset-0 size-full">
-          {CONTOURS.map((path) => <path key={path} d={path} fill="none" stroke="rgba(147,197,253,0.9)" strokeWidth="1.7" />)}
+          {CONTOURS.map((path) => (
+            <path key={path} d={path} fill="none" stroke="rgba(147,197,253,0.85)" strokeWidth="1.6" />
+          ))}
         </svg>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_22%,rgba(37,99,235,0.2),transparent_25%),radial-gradient(circle_at_25%_72%,rgba(30,64,175,0.17),transparent_32%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_68%_22%,rgba(37,99,235,0.18),transparent_28%),radial-gradient(circle_at_25%_72%,rgba(30,64,175,0.14),transparent_34%)]" />
       </div>
 
       <div className="light-aurora size-full dark:hidden">
-        <div className="aurora-orb aurora-orb-one" />
-        <div className="aurora-orb aurora-orb-two" />
-        <div className="aurora-orb aurora-orb-three" />
-        <div className="aurora-orb aurora-orb-four" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(96,165,250,0.22),transparent_42%),radial-gradient(circle_at_85%_18%,rgba(129,140,248,0.16),transparent_40%),radial-gradient(circle_at_50%_85%,rgba(59,130,246,0.12),transparent_48%)]" />
         <div className="light-noise absolute inset-0" />
       </div>
     </div>

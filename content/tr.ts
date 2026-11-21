@@ -1,146 +1,197 @@
 export const tr = {
   nav: {
     features: "Özellikler",
-    internship: "Staj Yönetimi",
+    internship: "İş ve staj",
     privacy: "Gizlilik",
-    roadmap: "Yol Haritası",
-    collaboration: "İş Birliği",
-    about: "Hakkında",
-    earlyAccess: "Erken Erişim"
+    roadmap: "Nasıl çalışır?",
+    collaboration: "Kimler için?",
+    about: "Kurucudan",
+    earlyAccess: "Erken Erişim · APK İndir",
+    languageSwitch: "Dili İngilizce yap",
+    themeToLight: "Açık temaya geç",
+    themeToDark: "Koyu temaya geç",
+    openMenu: "Menüyü aç",
+    closeMenu: "Menüyü kapat"
   },
   hero: {
-    badge: "Gizlilik odaklı çalışma ve staj yönetimi",
-    title: "Stajından iş hayatına, tüm sürecin tek yerde.",
-    description: "İş günlerini takip et, günlüklerini düzenli yaz, belgelerini güvenle sakla ve staj defterini tek dokunuşla PDF’e dönüştür.",
-    subtitle: "Verilerin cihazında kalır. İşYolum iş hayatını düzenler, kontrolü sende bırakır.",
-    ctaPrimary: "Erken Erişime Katıl",
-    ctaSecondary: "Özellikleri İncele",
-    collaborationLink: "Destek ve İş Birliği",
+    badge: "İŞ YOLUM İÇİN ERKEN ERİŞİM BAŞLADI",
+    title: "İş günlerini, çalışma saatini ve kariyer geçmişini tek yerde tut.",
+    description: "İşYolum artık erken erişimde! Çalışma günlerini ve kalan saatini takip et; günlüklerini, başvurularını, belgelerini ve kariyer kayıtlarını hemen Android cihazına indirip düzenle.",
+    subtitle: "İşYolum, çalışma hayatındaki dağınık kayıtları kişisel ve cihaz öncelikli bir düzende bir araya getirir.",
+    ctaPrimary: "Erken Erişim APK'sını İndir",
+    ctaSecondary: "Nasıl çalıştığını gör",
+    collaborationLink: "Test ve iş birliği",
     briefing: {
-      kicker: "SYS_BRIEFING",
-      title: "Cihaz içi mimari, kelime kelime.",
-      note: "Hazır istatistik yok. Bu özet, İşYolum’un bugünkü gizlilik modelini anlatır.",
-      lead: "İşYolum günlük, belge ve iş günü kayıtlarını temel olarak cihazında tutar.",
-      continuation: "OCR ve arama cihaz içinde çalışır. Şifreli yedekleme henüz yok.",
-      sourcesLabel: "yerel katman",
-      followUpsLabel: "Devam",
-      copy: "Kopyala",
+      kicker: "AÇIK VE NET",
+      title: "Verinin nerede durduğunu bil.",
+      note: "İşYolum'un çalışma şeklini, cihazda kalan verileri ve OCR kullanıldığında oluşan teknik aktarımı açıkça anlatıyoruz.",
+      lead: "Günlükler, iş kayıtları, başvurular ve ayarlar cihazındaki şifreli veritabanında tutulur.",
+      continuation: "Eklediğin dosyalar uygulamanın özel alanında kalır. Android OCR metni göndermez; teknik kullanım ölçümleri Google'a iletilebilir.",
+      sourcesLabel: "bilgi kaynağı",
+      followUpsLabel: "Daha fazlası",
+      copy: "Metni kopyala",
       copied: "Kopyalandı",
-      retry: "Yeniden oynat",
+      retry: "Yeniden göster",
       useful: "Faydalı",
       notUseful: "Faydalı değil",
+      usefulSelected: "Faydalı olarak işaretlendi",
+      notUsefulSelected: "Faydalı değil olarak işaretlendi",
+      feedbackThanks: "Geri bildirimin bu sayfada kaldı.",
+      copyFailed: "Kopyalama başarısız",
       sources: [
-        { name: "SQLCipher", domain: "LOCAL_DB", href: "#privacy" },
-        { name: "OCR", domain: "DEVICE_ONLY", href: "#features" },
-        { name: "İş Kasası", domain: "APP_VAULT", href: "#privacy" }
+        { name: "Cihazda saklama", domain: "KAYITLAR", href: "#privacy" },
+        { name: "Belge tarama", domain: "OCR", href: "#privacy" },
+        { name: "İşYolum", domain: "ÖZELLİKLER", href: "#features" }
       ],
       followUps: [
-        { text: "Veriler nerede tutulur?", href: "#privacy" },
-        { text: "Hangi özellikler hazır?", href: "#features" }
+        { text: "Veriler nasıl saklanıyor?", href: "#privacy" },
+        { text: "Uygulama neler yapıyor?", href: "#features" }
       ]
     }
   },
   problem: {
-    title: "Staj ve çalışma süresi neden bu kadar dağınık?",
+    title: "İş ve staj kayıtları neden ayrı ayrı tutuluyor?",
     cards: [
-      { title: "Kopuk İş Günleri", description: "Çalışma günleri ve takvim kayıtları farklı yerlerde tutuluyor." },
-      { title: "Geciken Günlükler", description: "Staj günlükleri son güne bırakılıyor ve yapılanlar unutuluyor." },
-      { title: "Kaybolan Belgeler", description: "Önemli evraklar farklı uygulamaların içinde kaybolup gidiyor." },
-      { title: "Yanlış Hesaplar", description: "Resmî tatiller, izinler ve staj bitiş tarihleri karıştırılıyor." },
-      { title: "Zaman Alan PDF'ler", description: "Staj defterini formatına uygun hazırlamak saatler alıyor." },
-      { title: "Unutulan Görevler", description: "Hatırlatıcılar ve yapılması gerekenler çalışma bağlamından kopuk." }
+      { title: "Kalan süreyi kestirmek zor", description: "Hedef iş günü ve çalışma saatini farklı hesaplayınca döneminin ne zaman biteceğini görmek zorlaşır." },
+      { title: "Günlükler birikir", description: "Gün sonunda not alınmayınca yaptıkların ve sonradan hatırlaman gereken ayrıntılar unutulabilir." },
+      { title: "Başvurular karışır", description: "Hangi şirkete ne zaman başvurduğunu ve sıradaki adımı tek bakışta izlemek güçleşir." },
+      { title: "Kariyer izi dağılır", description: "Projeler, öğrendiklerin, başarıların ve belgelerin farklı uygulamalara yayılır." },
+      { title: "Belgeler bulunmaz", description: "CV, sertifika ve çalışma belgeleri ihtiyaç duyduğun anda kolayca bulunamayabilir." },
+      { title: "Teslim son güne kalır", description: "Günlükleri dönem sonunda toparlamak staj defterini hazırlamayı zorlaştırır." }
     ],
-    footer: "İşYolum, birbirinden kopuk tüm bu süreçleri tek bir kişisel çalışma alanında birleştirir."
+    footer: "İşYolum; takvimini, çalışma süreni, notlarını ve kariyer kayıtlarını aynı kişisel çalışma alanında toplar."
   },
   features: {
-    title: "Her Şey Kontrol Altında",
+    title: "Gününden kariyer geçmişine, aynı yerde",
     cards: [
-      { title: "Akıllı Staj Takibi", description: "Başlangıç tarihi ve iş günü hedefini belirle. Tatilleri otomatik düşerek bitiş tarihini hesapla." },
-      { title: "Günlük ve Çalışma Kaydı", description: "Her güne özel günlük tut. 'Stajının 9. gününde ne yaptın?' anında gör." },
-      { title: "İş Kasası", description: "PDF, Word ve fotoğrafları güvenle cihazında sakla, dönemlere göre grupla." },
-      { title: "PDF Staj Defteri", description: "Günlükleri kronolojik sıralayıp tek dokunuşla profesyonel A4 staj defterine dönüştür." },
-      { title: "Cihaz İçi OCR", description: "Görsel belgelerindeki metinleri cihazında tara. İnternete veya buluta göndermeden metinleri kopyala." },
-      { title: "Genel Arama", description: "Günlükler, belgeler ve OCR içeriklerinde hızlıca Türkçe karakter destekli arama yap." },
-      { title: "Bugünü Tamamla", description: "Ana sayfadaki akıllı kontrol listesiyle günlük eksiklerini anında gör ve tamamla." },
-      { title: "Haftalık Özet", description: "Haftalık çalışma saatlerini, yazılan günlükleri ve hedeflerini tek bakışta analiz et." },
-      { title: "Yerel Hatırlatıcılar", description: "Uygulama kapalıyken bile çalışan cihaz içi bildirimlerle önemli anları kaçırma." },
-      { title: "Biyometrik Kilit", description: "Uygulamaya Face ID veya Parmak İzi ile giriş yap, özel verilerini sadece sen gör." }
+      { title: "İş günü ve dönem takvimi", description: "Staj ya da çalışma dönemini tanımla; çalışma takvimini, hedef iş gününü ve tahmini bitiş tarihini izle." },
+      { title: "Çalışma saati ve kalan süre", description: "Günlük çalışma süreni kaydet; toplam hedefe ne kadar yaklaştığını ve kaç saatin kaldığını gör." },
+      { title: "Günlükler ve haftalık özet", description: "Gün içinde yaptıklarını not et; tamamlanma durumunu ve haftalık ilerlemeni gözden geçir." },
+      { title: "Kariyer hafızası", description: "İş deneyimlerini, projelerini, görevlerini, becerilerini, sertifikalarını ve başarılarını zaman çizelgende tut." },
+      { title: "Başvuru takibi", description: "İş ve staj başvurularını durumlarıyla kaydet; görüşme ve takip tarihlerini hatırlatıcılarla izle." },
+      { title: "Belge kasası ve PDF", description: "Belgelerini dönemlere göre düzenle; staj günlüklerini A4 PDF defterine aktar." },
+      { title: "OCR ve içerik arama", description: "Desteklenen görsel belgelerdeki metni cihazında tara; günlük, belge ve kayıtlarında ara." },
+      { title: "Yerel hatırlatıcılar", description: "Görüşme, teslim ve çalışma günleri için cihazında planlanan bildirimler oluştur." }
     ]
   },
   privacy: {
-    title: "Verileriniz sizinle kalır.",
-    description: "İşYolum, yerel öncelikli bir mimariyle geliştirilir. Günlükleriniz, belgeleriniz ve çalışma kayıtlarınız temel olarak kendi cihazınızda saklanır. Belge OCR işlemleri ve arama özellikleri cihaz içinde çalışır.",
+    title: "Kayıtların öncelikle cihazında kalır.",
+    description: "İş, staj, günlük, başvuru, proje ve beceri kayıtları SQLCipher ile şifrelenen yerel veritabanında tutulur. Eklediğin dosyalar uygulamanın özel dosya alanında saklanır; bu dosyalar ayrıca şifrelenmez. İşYolum hesabı veya kendi bulut eşitlemesi sunmaz.",
     items: [
-      "Şifreli yerel veritabanı (SQLCipher)",
-      "Uygulamaya özel dosya alanı",
-      "Cihaz içi makine öğrenimi ile OCR",
-      "Cihaz içi tam metin arama",
-      "Biyometrik uygulama kilidi",
-      "Kullanıcı kontrolü öncelikli tasarım"
+      "Yerel kayıt veritabanı SQLCipher ile şifrelenir",
+      "Belgeler uygulamanın özel dosya alanında saklanır",
+      "OCR metni geliştiriciye veya Google'a gönderilmez",
+      "Android OCR teknik ölçümleri Google'a gidebilir",
+      "Hatırlatıcılar cihazda yerel bildirim olarak planlanır",
+      "Uygulama kilidi cihazın biyometrik doğrulamasını kullanır"
     ],
-    note: "Not: Güvenli şifreli yedekleme özelliği araştırma aşamasındadır. Uygulama silindiğinde yerel veriler de silinebilir."
+    note: "Android'de OCR modeli ilk kez indirilirken internet gerekebilir. ML Kit kullanımında cihaz, uygulama ve tanılama ölçümleri Google'a iletilebilir; belge görseli ve tanınan metin bu ölçümlere dahil değildir. Uygulamayı kaldırmak yerel kayıt ve dosyaları silebilir."
   },
   collaboration: {
-    title: "İşYolum'u birlikte büyütelim.",
-    description: "İşYolum, öğrencilerin ve genç çalışanların staj ve çalışma deneyimlerini daha düzenli yönetmesine yardımcı olmayı amaçlayan yayın öncesi bir mobil üründür. Teknik mentorluk, test altyapısı, güvenlik danışmanlığı, girişim programları ve pilot iş birliklerine açığız.",
+    title: "İşYolum çalışma şekline uyum sağlar.",
+    description: "Profil ve Ayarlar ekranından amacına uygun kullanıcı modunu seç. Staj, iş arama, mevcut iş ve proje kayıtlarını kendi dönemlerinle düzenle.",
     cards: [
-      "Teknik Mentorluk",
-      "Bulut ve CI/CD Kredileri",
-      "Güvenlik Denetimi",
-      "Üniversite Pilotları",
-      "Staj Programı İş Birlikleri",
-      "Kullanıcı Testleri",
-      "Erişilebilirlik Desteği",
-      "Pazara Çıkış Destekleri"
+      { title: "Stajyer Modu", description: "Staj süreci, zorunlu staj defteri, günlük çalışma durumu ve haftalık özet takibi." },
+      { title: "İş Arayan Modu", description: "İş ve staj başvuruları, mülakat hazırlığı, takip hatırlatıcıları ve CV yönetimi." },
+      { title: "Çalışan Modu", description: "İş notları, günlük görevler, çalışma dönemleri ve İş Kasam evrak depolama." },
+      { title: "Kariyer Hafızası", description: "İş/Staj, proje, beceri, başarı ve kanıtlarını yıllara göre zaman çizelgesinde biriktir." }
     ],
-    ctaPrimary: "İş Birliği İçin İletişime Geç",
-    ctaSecondary: "Proje Özetini Görüntüle"
+    ctaPrimary: "Erken Erişim APK'sını İndir",
+    ctaSecondary: "Uygulama akışını gör"
   },
   faq: {
-    title: "Sık Sorulan Sorular",
+    eyebrow: "KISA YANITLAR",
+    title: "Sık sorulan sorular",
     items: [
-      { q: "İşYolum bir iş bulma uygulaması mı?", a: "Hayır. İşYolum iş ilanı sunmaz. Kullanıcının staj, çalışma, başvuru, günlük, belge ve hatırlatıcı süreçlerini düzenlemesine yardımcı olur." },
-      { q: "Verilerim nerede saklanır?", a: "Uygulama verileri temel olarak kullanıcının kendi telefonundaki uygulamaya özel alanda saklanır." },
-      { q: "İnternet bağlantısı gerekli mi?", a: "Uygulamanın temel özellikleri cihaz içinde çalışacak şekilde tasarlanmıştır. Sürekli internet bağlantısı gerektirmez." },
-      { q: "Belge metinleri bir sunucuya gönderiliyor mu?", a: "Hayır. Desteklenen görsel belgelerde OCR işlemi tamamen cihaz içinde gerçekleştirilir." },
-      { q: "Uygulama silinirse verilerim ne olur?", a: "Uygulamanın özel alanındaki yerel veriler silinebilir. Güvenli şifreli yedekleme sistemi yol haritasında bulunmaktadır." },
-      { q: "Dosya yükleme sınırı nedir?", a: "Mevcut beta sürümünde tek dosya için 20 MB sınırı bulunmaktadır. Gelecekte akıllı görsel sıkıştırma planlanmaktadır." },
-      { q: "PDF staj defteri oluşturulabilir mi?", a: "Evet. Staj günlükları ve çalışma kayıtları A4 düzeninde profesyonel PDF staj defterine dönüştürülebilir." },
-      { q: "İşYolum hangi platformda yayınlanacak?", a: "İlk aşamada Android için hazırlanmakta, iOS desteği gelecek planları arasında bulunmaktadır." },
-      { q: "Uygulama şu anda indirilebilir mi?", a: "Uygulama yayın öncesi beta ve gerçek cihaz testleri aşamasındadır. Erken erişim listesine kayıt olarak süreci takip edebilirsiniz." }
+      { q: "İşYolum iş ilanı veya iş bulma uygulaması mı?", a: "Hayır. İşYolum ilan yayınlamaz ve iş bulmayı garanti etmez. Başvurularını, görüşme tarihlerini, çalışma kayıtlarını ve kariyer geçmişini düzenlemene yardımcı olur." },
+      { q: "Hangi çalışma sürelerini takip edebilirim?", a: "Bir dönem için hedef iş günü ve isteğe bağlı toplam çalışma süresi belirleyebilir; kaydettiğin günleri, çalıştığın süreyi ve kalan hedefi izleyebilirsin. Takvim hesabında çalışma günlerin ve seçtiğin tatil ayarları dikkate alınır." },
+      { q: "Kariyer hafızasında neler tutabilirim?", a: "İş deneyimleri, görevler, projeler, öğrenme kayıtları, beceriler, sertifikalar, başarılar, notlar ve bunlarla ilişkilendirdiğin belgeler." },
+      { q: "Başvuru takibi nasıl çalışır?", a: "İş veya staj başvurularını ekleyebilir, durumlarını güncelleyebilir ve görüşme ya da takip tarihleri için hatırlatıcı oluşturabilirsin. İşYolum başvuruyu senin adına göndermez." },
+      { q: "Kayıtlarım nerede saklanıyor?", a: "Uygulama kayıtları cihazındaki SQLCipher ile şifrelenen veritabanında tutulur. Eklediğin dosyalar uygulamanın özel alanındadır; dosyaların kendileri ayrıca şifrelenmez." },
+      { q: "OCR belgemi veya metnini internete gönderiyor mu?", a: "Desteklenen belgelerde görüntü ve tanınan metin OCR için geliştiriciye veya Google'a gönderilmez. Android'de ML Kit, OCR kullanıldığında cihaz/uygulama bilgileri ve teknik ölçümleri Google'a iletebilir. İlk model indirmesi için internet gerekebilir." },
+      { q: "Uygulamayı silersem kayıtlarım kalır mı?", a: "Uygulama verileri cihazda yerel tutulur ve uygulama kaldırıldığında silinebilir. İşYolum hesap eşitlemesi veya kendi bulut yedeklemesini sunmaz." },
+      { q: "Staj defterini PDF olarak hazırlayabilir miyim?", a: "Evet. Staj dönemi günlüklerini kronolojik sırayla A4 PDF staj defteri olarak dışa aktarabilirsin." },
+      { q: "Bir belge için boyut sınırı var mı?", a: "Belge ekleme ekranında tek dosya için 20 MB sınırı bulunur. Büyük görseller kaydedilmeden önce küçültme için optimize edilebilir." },
+      { q: "Uygulamaya nasıl erişebilirim?", a: "İşYolum için Erken Erişim başladı! Sitemizdeki 'Erken Erişim APK'sını İndir' butonuna tıklayarak son derlenen Android APK kurulum paketini (16 Kasım 2026 derlemesi) doğrudan telefonuna indirip hemen kullanmaya başlayabilirsin." }
     ]
   },
   founder: {
-    text: "İşYolum, staj sürecinde günlüklerin, belgelerin ve iş günü hesaplarının farklı yerlerde tutulmasından doğan gerçek bir ihtiyaçtan ortaya çıktı. Amacım, öğrencilerin ve çalışma hayatına yeni başlayan kişilerin bu süreçleri daha düzenli ve güvenli şekilde yönetmesini sağlamak."
+    text: "İşYolum, staj günleri, çalışma saatleri, günlükler ve belgeler farklı yerlerde kaldığında ortaya çıkan dağınıklığı azaltmak için geliştiriliyor. Büyük bir heyecanla İşYolum'u erken erişime açtık; artık uygulamanın son sürümünü doğrudan indirip kendi kayıtlarını güvenli ve anlaşılır bir yerde tutmaya başlayabilirsin."
   },
   form: {
-    title: "Erken Erişime Katılın",
-    description: "Gelişmelerden ilk siz haberdar olun ve kapalı beta testlerine katılın.",
-    name: "Adınız (İsteğe Bağlı)",
-    email: "E-posta Adresiniz",
-    type: "Kullanıcı Tipi",
+    title: "İŞ YOLUM İÇİN ERKEN ERİŞİM BAŞLADI",
+    description: "Son derlenen Android APK paketini doğrudan cihazına indirip hemen kullanmaya başlayabilirsin. Ayrıca yeni sürümlerden haberdar olmak ve geri bildirim paylaşmak için aşağıdan kaydolabilirsin.",
+    name: "Adın (isteğe bağlı)",
+    email: "E-posta adresin",
+    type: "Sana en uygun kullanım",
+    selectPrompt: "Bir seçenek belirle",
     types: {
       student: "Öğrenci",
       intern: "Stajyer",
-      jobseeker: "İş Arayan",
+      jobseeker: "İş arayan",
       worker: "Çalışan",
-      freelancer: "Freelancer",
-      university: "Üniversite / Şirket",
-      supporter: "Destek Programı"
+      freelancer: "Serbest çalışan",
+      university: "Üniversite / şirket",
+      supporter: "Diğer"
     },
-    message: "Mesajınız (İsteğe Bağlı)",
-    consent: "Verilerimin iletişim amacıyla işlenmesini kabul ediyorum.",
-    submit: "Gönder",
-    success: "Başvuru gönderildi.",
+    message: "Eklemek istediğin bir şey var mı? (İsteğe bağlı)",
+    consent: "Başvuru bilgilerimin kapalı test ve bilgilendirme amacıyla işlenmesini kabul ediyorum.",
+    privacyLink: "Gizlilik politikasını oku",
+    submit: "Talep gönder",
+    success: "Talebin kapalı test için iletildi.",
     submitting: "Gönderiliyor...",
-    inactive: "Erken erişim formu henüz aktif değil.",
-    error: "Gönderim başarısız oldu.",
-    tryAgain: "Lütfen tekrar deneyin.",
-    privacyRequired: "Gizlilik onayı gerekli."
+    inactive: "Başvuru formu şu anda kullanılamıyor. Lütfen daha sonra tekrar dene.",
+    error: "Talebin gönderilemedi.",
+    tryAgain: "Lütfen tekrar dene.",
+    privacyRequired: "Devam etmek için gizlilik onayı gerekli."
   },
   footer: {
-    description: "Çalışma hayatın, düzenli ve kontrolün altında.",
+    description: "Çalışma günlerin, saatlerin ve kariyer kayıtların için kişisel düzen.",
+    navigation: "Sayfada gezin",
+    earlyAccess: "Erken Erişim",
+    privacy: "Gizlilik politikası",
+    status: "İŞ YOLUM İÇİN ERKEN ERİŞİM BAŞLADI · APK İndirilebilir",
     rights: "Tüm hakları saklıdır."
+  },
+  policy: {
+    title: "İşYolum Gizlilik Politikası",
+    lastUpdated: "Son güncelleme: 7 Kasım 2026",
+    intro: "Bu politika İşYolum mobil uygulamasının ve bu web sitesindeki kapalı test iletişim formunun kişisel verileri nasıl işlediğini açıklar.",
+    sections: [
+      {
+        title: "Uygulama kayıtları ve dosyalar",
+        body: "İş, staj, başvuru, günlük, proje, beceri, hatırlatıcı ve ayar kayıtları cihazınızdaki yerel veritabanında tutulur. Veritabanı, güvenli depolamada korunan cihaz anahtarıyla SQLCipher kullanılarak şifrelenir. Eklediğiniz PDF ve diğer dosyalar uygulamanın özel dosya alanında saklanır; bu dosyalar SQLCipher veritabanının parçası değildir ve ayrıca şifrelenmez."
+      },
+      {
+        title: "Sunucu, hesap ve yedekleme",
+        body: "İşYolum uygulama kayıtlarını geliştirici sunucusuna otomatik göndermez. Uygulamada kullanıcı hesabı, uygulama tarafından sunulan bulut eşitlemesi, reklam, geliştirici analitik SDK'sı veya çökme raporlama hizmeti yoktur. Android uygulama verileri Google Drive yedeklemesi ve otomatik cihazdan cihaza aktarım dışında tutulur. iOS cihaz yedeklemeleri Apple sistem ayarlarına tabidir."
+      },
+      {
+        title: "Belge seçimi, OCR ve paylaşım",
+        body: "Belgeler cihazın sistem dosya seçicisiyle seçilir. Android'de OCR modeli Google Play Services üzerinden indirilebilir; ilk indirme internet gerektirebilir. Android'de Google ML Kit, iOS'ta Apple Vision seçilen belgeyi cihaz üzerinde işler. Belge görüntüsü ve tanınan metin OCR için geliştiriciye veya Google'a gönderilmez. Model hazır olduğunda Android'de sonraki taramalar çevrimdışı yapılabilir. Uygulama kamera ile belge taramaz ve kamera izni istemez. Bir dosyayı paylaşmayı seçerseniz dosya sistem paylaşım panelinde seçtiğiniz uygulamaya aktarılır."
+      },
+      {
+        title: "Android OCR teknik ölçümleri",
+        body: "Android OCR kullanıldığında Google ML Kit SDK'sı; cihaz üreticisi/modeli ve Android sürümü, uygulama paketi/sürümü, kullanılabilir donanım hızlandırıcıları, cihaz/kurulum tanımlayıcıları, işlem süresi, API yapılandırması, girdi/çıktı boyutları, özellik/model sürümü, olay türleri ve hata kodları gibi teknik ölçümleri Google'a gönderebilir. Google bu ölçümleri tanılama ve kullanım analizi için kullandığını, HTTPS ile aktardığını ve üçüncü taraflarla paylaşmadığını bildirir. Bu ölçümlere belge görüntüsü ve OCR metni dahil değildir. İşYolum bu ölçümler için ayrı bir silme kontrolü sunmaz."
+      },
+      {
+        title: "Uygulama kilidi ve bildirimler",
+        body: "İsteğe bağlı uygulama kilidi cihazın işletim sistemi doğrulama ekranını kullanır. İşYolum biyometrik görüntü veya şablonlara erişmez ve bunları saklamaz. Hatırlatıcılar cihazda yerel bildirim olarak planlanır; push bildirim sunucusu kullanılmaz."
+      },
+      {
+        title: "Kapalı test iletişim formu",
+        body: "Web sitesindeki formu gönderirseniz adınız, e-posta adresiniz, kullanım tipiniz ve isteğe bağlı mesajınız kapalı test ve ürün bilgilendirmesi amacıyla geliştiricinin iletişim e-posta hesabına gönderilir. Form bilgileri İşYolum mobil uygulamasına veya bir uygulama hesabına aktarılmaz; web sitesinde ayrı bir kullanıcı hesabı ya da başvuru veritabanı bulunmaz. İletim için Gmail/Google e-posta hizmeti kullanılır. Formu göndermeyerek bu aktarımı önleyebilirsiniz."
+      },
+      {
+        title: "Web sitesi tercihleri",
+        body: "Web sitesi seçtiğiniz dili ve temayı tarayıcınızın yerel depolamasında hatırlar. Bu tercihler iletişim formu gönderilmedikçe geliştiriciye iletilmez."
+      },
+      {
+        title: "Saklama, silme ve iletişim",
+        body: "Uygulama kayıtlarınızı uygulama içinden silebilirsiniz; uygulamayı kaldırmak yerel veritabanını ve özel dosya alanını da silebilir. Formla gönderdiğiniz e-posta içeriğinin silinmesini veya gizlilikle ilgili sorularınızı contact@temurcode.com.tr adresine iletebilirsiniz. Google ML Kit tarafından gönderilen teknik ölçümler için İşYolum'da ayrı bir silme kontrolü yoktur."
+      }
+    ],
+    contact: "Gizlilik soruları için"
   }
 };
 

@@ -14,7 +14,6 @@ import {
 import { useReducedMotion } from "motion/react";
 
 const WORD_MS = 80;
-const HOLD_MS = 3400;
 
 export type StreamingSource = {
   name: string;
@@ -36,9 +35,13 @@ export type StreamingTextProps = {
   followUpsLabel: string;
   copyLabel: string;
   copiedLabel: string;
+  copyFailedLabel: string;
   retryLabel: string;
   usefulLabel: string;
   notUsefulLabel: string;
+  usefulSelectedLabel: string;
+  notUsefulSelectedLabel: string;
+  feedbackThanksLabel: string;
 };
 
 type Token = { text: string; cite?: boolean };
@@ -76,45 +79,67 @@ export default function StreamingText({
   followUpsLabel,
   copyLabel,
   copiedLabel,
+  copyFailedLabel,
   retryLabel,
   usefulLabel,
   notUsefulLabel,
+  usefulSelectedLabel,
+  notUsefulSelectedLabel,
+  feedbackThanksLabel,
 }: StreamingTextProps) {
   const tokens = useMemo(() => toTokens(lead, continuation), [lead, continuation]);
   const prefersReducedMotion = useReducedMotion() ?? false;
   const [count, setCount] = useState(0);
   const [sourcesOpen, setSourcesOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
+  const [feedback, setFeedback] = useState<"useful" | "not-useful" | null>(null);
   const visibleCount = prefersReducedMotion ? tokens.length : count;
   const done = visibleCount >= tokens.length;
   const fullText = `${lead} ${continuation}`.trim();
 
   useEffect(() => {
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || count >= tokens.length) {
       return;
     }
 
-    const timeout = window.setTimeout(
-      () => setCount((current) => (current >= tokens.length ? 0 : current + 1)),
-      done ? HOLD_MS : WORD_MS
-    );
+    const timeout = window.setTimeout(() => setCount((current) => Math.min(current + 1, tokens.length)), WORD_MS);
     return () => window.clearTimeout(timeout);
-  }, [count, done, prefersReducedMotion, tokens.length]);
+  }, [count, prefersReducedMotion, tokens.length]);
 
   const handleCopy = async () => {
+    setCopyFailed(false);
     try {
-      await navigator.clipboard.writeText(fullText);
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(fullText);
+      } else {
+        const textarea = document.createElement("textarea");
+        textarea.value = fullText;
+        textarea.setAttribute("readonly", "true");
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        let copiedToClipboard = false;
+        try {
+          textarea.select();
+          copiedToClipboard = document.execCommand("copy");
+        } finally {
+          textarea.remove();
+        }
+        if (!copiedToClipboard) throw new Error("Clipboard copy was rejected");
+      }
       setCopied(true);
-      window.setTimeout(() => setCopied(false), 1600);
+      window.setTimeout(() => setCopied(false), 1800);
     } catch {
       setCopied(false);
+      setCopyFailed(true);
     }
   };
 
-  const actions: { id: string; label: string; icon: ReactNode; onClick?: () => void }[] = [
+  const actions: { id: string; label: string; icon: ReactNode; onClick?: () => void; pressed?: boolean }[] = [
     {
       id: "copy",
-      label: copied ? copiedLabel : copyLabel,
+      label: copied ? copiedLabel : copyFailed ? copyFailedLabel : copyLabel,
       icon: <Copy className="size-[15px]" />,
       onClick: handleCopy,
     },
@@ -125,10 +150,23 @@ export default function StreamingText({
       onClick: () => {
         setCount(0);
         setSourcesOpen(false);
+        setFeedback(null);
       },
     },
-    { id: "useful", label: usefulLabel, icon: <ThumbsUp className="size-[15px]" /> },
-    { id: "not-useful", label: notUsefulLabel, icon: <ThumbsDown className="size-[15px]" /> },
+    {
+      id: "useful",
+      label: usefulLabel,
+      icon: <ThumbsUp className="size-[15px]" />,
+      pressed: feedback === "useful",
+      onClick: () => setFeedback((current) => current === "useful" ? null : "useful"),
+    },
+    {
+      id: "not-useful",
+      label: notUsefulLabel,
+      icon: <ThumbsDown className="size-[15px]" />,
+      pressed: feedback === "not-useful",
+      onClick: () => setFeedback((current) => current === "not-useful" ? null : "not-useful"),
+    },
   ];
 
   return (
@@ -168,8 +206,11 @@ export default function StreamingText({
             key={action.id}
             type="button"
             aria-label={action.label}
+            aria-pressed={action.pressed}
             onClick={action.onClick}
-            className="flex size-6 items-center justify-center rounded-[6px] text-ink-3 transition-colors duration-100 hover:bg-hover-2 hover:text-ink-2"
+            className={action.pressed
+              ? "flex size-7 items-center justify-center rounded-[6px] bg-primary/10 text-primary transition-colors duration-100 hover:bg-hover-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              : "flex size-7 items-center justify-center rounded-[6px] text-ink-3 transition-colors duration-100 hover:bg-hover-2 hover:text-ink-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"}
           >
             {action.icon}
           </button>
@@ -198,6 +239,11 @@ export default function StreamingText({
           </span>
         </button>
       </div>
+      {feedback && (
+        <p role="status" aria-live="polite" className="mt-1 text-[11px] text-ink-2">
+          {feedback === "useful" ? usefulSelectedLabel : notUsefulSelectedLabel} · {feedbackThanksLabel}
+        </p>
+      )}
 
       <div
         className="grid transition-[grid-template-rows,opacity] duration-300"

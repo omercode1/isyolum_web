@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/lib/i18n";
 import { useTheme } from "next-themes";
 import { Menu, X, Moon, Sun } from "lucide-react";
@@ -21,14 +22,15 @@ export function Header() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      const next = window.scrollY > 10;
+      setIsScrolled((prev) => (prev !== next ? next : prev));
     };
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && mobileMenuOpen) {
         setMobileMenuOpen(false);
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -74,10 +76,22 @@ export function Header() {
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold text-lg shadow-[0_0_15px_rgba(37,99,235,0.4)]">
-            İ
-          </div>
-          <span className="text-sm font-semibold tracking-tight text-foreground">İşYolum</span>
+          <a
+            href="#home"
+            onClick={(e) => handleNavClick(e, "#home")}
+            aria-label="İşYolum ana sayfa"
+            className="flex items-center gap-2.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            <Image
+              src="/images/store/app-icon.png"
+              alt="İşYolum"
+              width={34}
+              height={34}
+              className="size-8.5 rounded-xl object-cover shadow-[0_0_16px_rgba(37,99,235,0.38)]"
+              priority
+            />
+            <span className="text-sm font-semibold tracking-tight text-foreground">İşYolum</span>
+          </a>
         </div>
 
         {/* Desktop Nav */}
@@ -99,7 +113,7 @@ export function Header() {
             <span className="px-2 py-1 rounded-sm bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest">
               {language === "tr" ? "TR" : "EN"}
             </span>
-            <Button variant="ghost" size="sm" onClick={toggleLanguage} aria-label="Toggle Language" className="h-auto py-1 px-2 font-bold text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground">
+            <Button variant="ghost" size="sm" onClick={toggleLanguage} aria-label={t.nav.languageSwitch} className="h-auto py-1 px-2 font-bold text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground">
               {language === "tr" ? "EN" : "TR"}
             </Button>
           </div>
@@ -108,7 +122,7 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={() => setTheme(isDarkTheme ? "light" : "dark")}
-              aria-label={isDarkTheme ? "Açık temaya geç" : "Koyu temaya geç"}
+              aria-label={isDarkTheme ? t.nav.themeToLight : t.nav.themeToDark}
               aria-pressed={isDarkTheme}
               className="relative h-9 w-[4.5rem] overflow-hidden rounded-full border border-border/80 bg-surface/75 p-0 shadow-inner hover:bg-surface"
             >
@@ -172,7 +186,7 @@ export function Header() {
                 <span className="px-2 py-1 rounded-sm bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest">
                   {language === "tr" ? "TR" : "EN"}
                 </span>
-                <Button variant="ghost" size="sm" onClick={toggleLanguage} aria-label="Toggle Language" className="h-auto py-1 px-2 font-bold text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground">
+                <Button variant="ghost" size="sm" onClick={toggleLanguage} aria-label={t.nav.languageSwitch} className="h-auto py-1 px-2 font-bold text-[10px] uppercase tracking-widest text-muted-foreground hover:text-foreground">
                   {language === "tr" ? "EN" : "TR"}
                 </Button>
               </div>
@@ -181,7 +195,8 @@ export function Header() {
                   variant="outline"
                   size="sm"
                   onClick={() => setTheme(isDarkTheme ? "light" : "dark")}
-                  aria-label={isDarkTheme ? "Açık temaya geç" : "Koyu temaya geç"}
+                  aria-label={isDarkTheme ? t.nav.themeToLight : t.nav.themeToDark}
+                  aria-pressed={isDarkTheme}
                 >
                   {isDarkTheme ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
                 </Button>

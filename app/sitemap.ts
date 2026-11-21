@@ -11,5 +11,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 1,
     },
+    {
+      url: `${baseUrl}/isyolum-gizlilik-politikasi`,
+      lastModified: new Date('2026-11-07T00:00:00+03:00'),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
   ]
 }

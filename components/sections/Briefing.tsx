@@ -35,9 +35,13 @@ export function Briefing() {
             followUpsLabel={briefing.followUpsLabel}
             copyLabel={briefing.copy}
             copiedLabel={briefing.copied}
+            copyFailedLabel={briefing.copyFailed}
             retryLabel={briefing.retry}
             usefulLabel={briefing.useful}
             notUsefulLabel={briefing.notUseful}
+            usefulSelectedLabel={briefing.usefulSelected}
+            notUsefulSelectedLabel={briefing.notUsefulSelected}
+            feedbackThanksLabel={briefing.feedbackThanks}
           />
         </div>
       </div>

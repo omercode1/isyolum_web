@@ -21,22 +21,24 @@ export function Privacy() {
     ? {
         eyebrow: "GİZLİLİK ÖNCE GELİR",
         device: "Senin cihazın",
-        deviceNote: "Kayıtların burada kalır",
+        deviceNote: "Hesap eşitlemesi yok",
         entries: "Günlükler",
         files: "Belgeler",
         search: "Arama",
         local: "Cihaz içinde",
         note: "Bilmen gereken",
+        fullPolicy: "Gizlilik politikasının tamamını oku",
       }
     : {
         eyebrow: "PRIVACY COMES FIRST",
         device: "Your device",
-        deviceNote: "Your records stay here",
+        deviceNote: "No account sync",
         entries: "Daily logs",
         files: "Documents",
         search: "Search",
         local: "On your device",
         note: "Good to know",
+        fullPolicy: "Read the full privacy policy",
       };
   const itemIcons = [Database, FileKey2, Smartphone, Search, Fingerprint, ShieldCheck];
   const flowItems = [
@@ -74,6 +76,13 @@ export function Privacy() {
           <div className="mt-6 rounded-2xl border border-amber-500/20 bg-amber-500/7 p-4">
             <p className="text-xs leading-relaxed text-amber-600 dark:text-amber-400"><span className="mr-2 font-bold">{labels.note}:</span>{t.privacy.note}</p>
           </div>
+          <a
+            href="/isyolum-gizlilik-politikasi"
+            className="mt-5 inline-flex items-center gap-2 rounded-lg text-sm font-semibold text-primary underline-offset-4 transition-colors hover:text-primary/80 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            {labels.fullPolicy}
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </a>
         </motion.div>
 
         <motion.div
@@ -90,7 +99,7 @@ export function Privacy() {
                 <span className="grid size-10 place-items-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20"><ShieldCheck className="size-5" /></span>
                 <div><p className="text-sm font-semibold text-foreground">{labels.device}</p><p className="mt-0.5 text-[11px] text-muted-foreground">{labels.deviceNote}</p></div>
               </div>
-              <span className="rounded-full border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-emerald-500">{labels.local}</span>
+              <span className="rounded-xl border border-primary/25 bg-primary/10 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.12em] text-primary">{labels.local}</span>
             </div>
 
             <div className="relative mt-8 grid grid-cols-3 gap-2 sm:gap-3">
@@ -107,7 +116,7 @@ export function Privacy() {
               <div className="flex items-center gap-3">
                 <div className="grid size-11 shrink-0 place-items-center rounded-full border border-primary/25 bg-background text-primary"><Fingerprint className="size-5" /></div>
                 <div className="min-w-0 flex-1"><p className="text-xs font-semibold text-foreground">{language === "tr" ? "Kontrol sende kalır" : "You stay in control"}</p><p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">{language === "tr" ? "Günlükler, belgeler ve arama akışı; anlatılan modelde cihaz içinde çalışır." : "Daily logs, documents, and search operate on-device in the stated model."}</p></div>
-                <Check className="size-4 shrink-0 text-emerald-500" />
+                <Check className="size-4 shrink-0 text-primary" />
               </div>
             </div>
           </div>

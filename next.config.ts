@@ -8,9 +8,18 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: false,
   },
-  // Allow access to remote image placeholder.
+  async redirects() {
+    return [
+      {
+        source: '/downloads/IsYolum-Erken-Erisim.apk',
+        destination:
+          'https://github.com/omercode1/isyolum_web/releases/download/v1.0.0-early-access/IsYolum-Erken-Erisim.apk',
+        permanent: false,
+      },
+    ];
+  },
   images: {
-    unoptimized: true,
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',

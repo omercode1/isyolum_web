@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useLanguage } from "@/lib/i18n";
-import { Sparkles, Rocket, Code2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sparkles, Code2, Download, Smartphone } from "lucide-react";
 import * as motion from "motion/react-client";
 import { useMotionPrefs } from "@/hooks/use-motion-prefs";
 
@@ -104,24 +106,30 @@ export function Founder() {
 
           <div className="flex flex-col md:flex-row gap-8 md:gap-10 items-center md:items-start text-center md:text-left relative z-10">
             <div className="relative">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-tr from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center flex-shrink-0 relative overflow-hidden md:group-hover:shadow-[0_0_30px_rgba(37,99,235,0.2)] transition-shadow duration-500">
-                <Code2 className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-primary md:group-hover:scale-110 transition-transform duration-500" />
+              <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-3xl bg-gradient-to-tr from-primary/20 to-primary/5 border border-primary/20 flex items-center justify-center flex-shrink-0 relative overflow-hidden md:group-hover:shadow-[0_0_30px_rgba(37,99,235,0.25)] transition-shadow duration-500 p-2">
+                <Image
+                  src="/images/store/app-icon.png"
+                  alt="İşYolum"
+                  width={112}
+                  height={112}
+                  className="size-full rounded-2xl object-cover md:group-hover:scale-105 transition-transform duration-500"
+                />
               </div>
               <div className="absolute -bottom-1 -right-1 sm:-bottom-2 sm:-right-2 w-8 h-8 sm:w-10 sm:h-10 bg-background rounded-full border border-border flex items-center justify-center shadow-lg">
-                <Rocket className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                <Code2 className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
               </div>
             </div>
             
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[9px] md:text-[10px] font-bold uppercase tracking-widest mb-3 md:mb-4">
                 <Sparkles className="w-3 h-3" />
-                <span>Founder&apos;s Note</span>
+                <span>{language === "tr" ? "Kurucudan" : "A note from the founder"}</span>
               </div>
               <h3 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-1 md:mb-2">
                 Ömer Faruk Temurtaş
               </h3>
               <p className="text-xs sm:text-sm text-primary font-medium mb-5 md:mb-6 flex flex-wrap items-center justify-center md:justify-start gap-2">
-                Kurucu & Geliştirici 
+                  {language === "tr" ? "Kurucu ve geliştirici" : "Founder and developer"}
                 <span className="w-1.5 h-1.5 rounded-full bg-primary/50" /> 
                 <span className="text-muted-foreground">İşYolum</span>
               </p>
@@ -133,13 +141,20 @@ export function Founder() {
                 </p>
               </div>
               
-              <div className="mt-6 md:mt-8 pt-5 md:pt-6 border-t border-border/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p className="text-[10px] md:text-xs font-mono text-muted-foreground uppercase tracking-widest text-center sm:text-left">
-                  {language === "tr" ? "İşYolum · Erken erişim" : "İşYolum · Early access"}
-                </p>
-                <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-primary">
-                  {language === "tr" ? "Yayına hazırlanıyor" : "Preparing to launch"}
-                </span>
+              <div className="mt-6 md:mt-8 pt-5 md:pt-6 border-t border-border/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div className="inline-flex items-center gap-2.5 rounded-xl border border-border bg-surface/70 px-3.5 py-2 text-xs font-semibold text-foreground">
+                  <Smartphone className="size-4 text-primary shrink-0" />
+                  <span>{language === "tr" ? "İşYolum Android · 16 Kasım 2026 Derlemesi" : "İşYolum Android · Nov 16, 2026 Build"}</span>
+                </div>
+                <Button size="sm" className="h-10 rounded-xl px-5 text-xs font-bold shadow-md w-full sm:w-auto" asChild>
+                  <a
+                    href="/downloads/IsYolum-Erken-Erisim.apk"
+                    download="IsYolum-Erken-Erisim.apk"
+                  >
+                    <Download className="mr-2 size-4" />
+                    {language === "tr" ? "Erken Erişim APK İndir" : "Download Early Access APK"}
+                  </a>
+                </Button>
               </div>
             </div>
           </div>

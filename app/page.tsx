@@ -10,7 +10,6 @@ import { Collaboration } from "@/components/sections/Collaboration";
 import { FAQ } from "@/components/sections/FAQ";
 import { EarlyAccess } from "@/components/sections/EarlyAccess";
 import { Founder } from "@/components/sections/Founder";
-import { FadeIn } from "@/components/animations/FadeIn";
 import { BackToTop } from "@/components/layout/BackToTop";
 import KineticGrid from "@/components/ui/kinetic-grid";
 import { ThemeAtmosphere } from "@/components/ui/theme-atmosphere";
@@ -19,27 +18,27 @@ export default function Home() {
   return (
     <div className="relative z-10 min-h-screen flex flex-col overflow-x-clip">
       <ThemeAtmosphere />
-      <KineticGrid className="opacity-70" />
+      <KineticGrid className="opacity-65" />
       <Header />
       <main className="flex-1">
-        <FadeIn><Hero /></FadeIn>
+        <Hero />
         <Briefing />
         <div className="border-b border-border/40" />
-        <FadeIn><DemoVideo /></FadeIn>
+        <DemoVideo />
         <div className="border-b border-border/40" />
-        <FadeIn><Problem /></FadeIn>
+        <Problem />
         <div className="border-b border-border/40" />
-        <FadeIn><Features /></FadeIn>
+        <Features />
         <div className="border-b border-border/40" />
-        <FadeIn><Privacy /></FadeIn>
+        <Privacy />
         <div className="border-b border-border/40" />
-        <FadeIn><Collaboration /></FadeIn>
+        <Collaboration />
         <div className="border-b border-border/40" />
-        <FadeIn><Founder /></FadeIn>
+        <Founder />
         <div className="border-b border-border/40" />
-        <FadeIn><FAQ /></FadeIn>
+        <FAQ />
         <div className="border-b border-border/40" />
-        <FadeIn><EarlyAccess /></FadeIn>
+        <EarlyAccess />
       </main>
       <Footer />
       <BackToTop />

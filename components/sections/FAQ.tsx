@@ -31,7 +31,7 @@ export function FAQ() {
         <div className="text-center mb-12 flex flex-col items-center">
           <div className="text-[10px] text-primary font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
             <span className="w-2 h-2 bg-primary rounded shadow-[0_0_8px_rgba(37,99,235,0.5)]"></span>
-            QUERY_INDEX
+            {t.faq.eyebrow}
           </div>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground uppercase">
             {t.faq.title}
@@ -49,9 +49,11 @@ export function FAQ() {
               className="border border-border bg-card rounded overflow-hidden"
             >
               <button
-                className="group w-full px-4 py-3 flex items-center justify-between text-left focus:outline-none md:hover:bg-surface/50 transition-colors duration-300 tap-scale"
+                id={`faq-question-${index}`}
+                className="group flex w-full items-center justify-between px-4 py-3 text-left transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary md:hover:bg-surface/50 tap-scale"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 aria-expanded={openIndex === index}
+                aria-controls={openIndex === index ? `faq-answer-${index}` : undefined}
               >
                 <div className="flex items-center gap-3 pr-4 min-w-0">
                   <span className="text-[10px] text-muted-foreground font-mono md:group-hover:text-primary transition-colors duration-300 shrink-0">Q{String(index + 1).padStart(2, '0')}</span>
@@ -65,13 +67,16 @@ export function FAQ() {
               <AnimatePresence initial={false}>
                 {openIndex === index && (
                   <motion.div
+                    id={`faq-answer-${index}`}
+                    role="region"
+                    aria-labelledby={`faq-question-${index}`}
                     initial={prefersReducedMotion ? false : { height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={prefersReducedMotion ? undefined : { height: 0, opacity: 0 }}
                     transition={accordionTransition}
                     className="overflow-hidden"
                   >
-                    <div className="px-4 pb-4 pt-1 ml-9 text-xs text-muted-foreground leading-relaxed font-mono">
+                    <div className="ml-9 px-4 pb-4 pt-1 text-xs leading-relaxed text-muted-foreground">
                       {item.a}
                     </div>
                   </motion.div>

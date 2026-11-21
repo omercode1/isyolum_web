@@ -298,13 +298,14 @@ export default function KineticGrid({
         return;
       }
       targetMouseRef.current = { x: event.clientX, y: event.clientY };
+      wake();
     };
 
     const onClick = (event: MouseEvent) => {
       if (!canRun()) {
         return;
       }
-      if (ripplesRef.current.length > 8) {
+      if (ripplesRef.current.length > 6) {
         ripplesRef.current.shift();
       }
       ripplesRef.current.push({
@@ -314,6 +315,7 @@ export default function KineticGrid({
         opacity: 1,
         born: performance.now(),
       });
+      wake();
     };
 
     let running = false;
@@ -334,16 +336,33 @@ export default function KineticGrid({
       mouse.x = lerpN(mouse.x, target.x, LERP_SPEED);
       mouse.y = lerpN(mouse.y, target.y, LERP_SPEED);
       draw(now);
-      rafRef.current = requestAnimationFrame(loop);
+
+      const dx = Math.abs(mouse.x - target.x);
+      const dy = Math.abs(mouse.y - target.y);
+      const hasMotion = dx > 0.35 || dy > 0.35 || ripplesRef.current.length > 0;
+
+      if (hasMotion && canRun()) {
+        rafRef.current = requestAnimationFrame(loop);
+      } else {
+        rafRef.current = 0;
+        running = false;
+      }
     };
 
-    const start = () => {
+    const wake = () => {
       if (running || !canRun()) {
         return;
       }
       running = true;
-      setSize();
       rafRef.current = requestAnimationFrame(loop);
+    };
+
+    const start = () => {
+      if (!canRun()) {
+        return;
+      }
+      setSize();
+      draw(performance.now());
     };
 
     const sync = () => {
